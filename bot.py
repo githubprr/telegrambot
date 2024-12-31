@@ -6,48 +6,19 @@ from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandle
 # Initialize Flask web server
 app = Flask(__name__)
 
-# Function to send scheduled messages
-async def send_message_at_specific_time(context: ContextTypes.DEFAULT_TYPE, chat_id, message_type, content, caption, buttons):
-    from datetime import datetime
-    import asyncio
-
-    now = datetime.now()
-    scheduled_time = datetime.strptime(content["datetime"], "%Y-%m-%d %H:%M")
-
-    # Calculate delay
-    delay = (scheduled_time - now).total_seconds()
-
-    if delay > 0:  # Wait if the scheduled time is in the future
-        print(f"Waiting {delay} seconds until {content['datetime']} to send message.")
-        await asyncio.sleep(delay)
-
-    # Send the message
-    if message_type == "photo":
-        with open(content["path"], "rb") as file:
-            await context.bot.send_photo(
-                chat_id=chat_id,
-                photo=file,
-                caption=caption,
-                reply_markup=InlineKeyboardMarkup(buttons),
-            )
-    elif message_type == "video":
-        with open(content["path"], "rb") as file:
-            await context.bot.send_video(
-                chat_id=chat_id,
-                video=file,
-                caption=caption,
-                reply_markup=InlineKeyboardMarkup(buttons),
-            )
-    print(f"Message sent at {datetime.now()} for scheduled time {content['datetime']}.")
+# A dictionary to store file IDs for different media types
+media_file_ids = {
+    "sikkim_hack": {"video": None, "audio": None, "image": None, "apk": None},
+    "goa_hack": {"video": None, "audio": None, "image": None, "apk": None},
+    "diuwin_hack": {"video": None, "audio": None, "image": None, "apk": None},
+    "okwin_hack": {"video": None, "audio": None, "image": None, "apk": None}
+}
 
 # Function to handle the start command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
-
-    # Instant message with buttons
     await context.bot.send_message(chat_id=chat_id, text="Welcome to the 🤑 Casino Hack Bot 🎲")
 
-    # First instant photo message before the buttons
     await context.bot.send_photo(
         chat_id=chat_id,
         photo="https://drive.google.com/uc?id=19p7j4tb9vIz_Ff6vAbcA_cMgnQLasC0O",
@@ -57,7 +28,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ])
     )
 
-    # Instant photo message with interactive buttons (This is the only instance of photo sending now)
     await context.bot.send_photo(
         chat_id=chat_id,
         photo="https://sstournaments.com/piyush/image2.jpg",
@@ -66,7 +36,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             [InlineKeyboardButton("✅SIKKIM VIP HACK✅", callback_data="sikkim_hack")],
             [InlineKeyboardButton("✅GOA STAR HACK✅", callback_data="goa_hack")],
             [InlineKeyboardButton("✅DIUWIN GRAND HACK✅", callback_data="diuwin_hack")],
-            [InlineKeyboardButton("✅OKWIN SURE HACK✅", callback_data="okwin_hack")]  # Added OKWIN button
+            [InlineKeyboardButton("✅OKWIN SURE HACK✅", callback_data="okwin_hack")]
         ])
     )
 
@@ -75,75 +45,73 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()  # Acknowledge the button click
 
-    # Checking the callback data and sending video + audio
-    if query.data == "sikkim_hack":
-        # Send video first
-        await query.message.reply_video(
-            video="https://sstournaments.com/piyush/sikkimhack.mp4",
-            caption="Here is your SIKKIM VIP HACK video! 🎮",
-            reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://sstournaments.com/piyush/sikkim1.apk")],
-                [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
-            ])
-        )
+    media_urls = {
+        "sikkim_hack": {
+            "video": "https://sstournaments.com/piyush/sikkimhack.mp4",
+            "audio": "https://sstournaments.com/piyush/sikkimaudio.mp3",
+            "image": "https://sstournaments.com/piyush/sikkimimage.jpg",
+            "apk": "https://sstournaments.com/piyush/sikkim1.apk"
+        },
+        "goa_hack": {
+            "video": "https://sstournaments.com/piyush/goahack.mp4",
+            "audio": "https://sstournaments.com/piyush/goahack.mp3",
+            "image": "https://sstournaments.com/piyush/goaimage.jpg",
+            "apk": "https://sstournaments.com/piyush/goagame.apk"
+        },
+        "diuwin_hack": {
+            "video": "https://sstournaments.com/piyush/diuwinhack.mp4",
+            "audio": "https://sstournaments.com/piyush/diuwinhack.mp3",
+            "image": "https://sstournaments.com/piyush/diuwinimage.jpg",
+            "apk": "https://sstournaments.com/piyush/diuwin1.apk"
+        },
+        "okwin_hack": {
+            "video": "https://sstournaments.com/piyush/okwinhack.mp4",
+            "audio": "https://sstournaments.com/piyush/okwinhack.mp3",
+            "image": "https://sstournaments.com/piyush/okwinimage.jpg",
+            "apk": "https://sstournaments.com/piyush/okwin4.apk"
+        }
+    }
 
-        # Send an audio file after the video
-        await query.message.reply_audio(
-            audio="https://sstournaments.com/piyush/sikkimaudio.mp3",
-            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
-        )
+    hack_type = query.data  # e.g., 'sikkim_hack'
 
-    elif query.data == "goa_hack":
-        # Send video first
-        await query.message.reply_video(
-            video="https://sstournaments.com/piyush/goahack.mp4",
-            caption="Here is your GOA STAR HACK video! 🎮",
-            reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://sstournaments.com/piyush/goagame.apk")],
-                [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
-            ])
-        )
+    # Iterate over media types (video, audio, image, apk)
+    for media_type in ["video", "audio", "image", "apk"]:
+        media_url = media_urls[hack_type][media_type]
+        file_id_key = media_file_ids[hack_type].get(media_type)
 
-        # Send an audio file after the video
-        await query.message.reply_audio(
-            audio="https://sstournaments.com/piyush/goahack.mp3",
-            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
-        )
+        if file_id_key:
+            # Use stored file_id for sending media
+            await send_media_by_file_id(query, media_type, file_id_key)
+        else:
+            # Upload the media for the first time and store the file_id
+            media = await upload_and_store_media(context, query.message.chat.id, media_type, media_url, hack_type)
+            file_id = media.file_id
+            media_file_ids[hack_type][media_type] = file_id
+            await send_media_by_file_id(query, media_type, file_id)
 
-    elif query.data == "diuwin_hack":
-        # Send video first
-        await query.message.reply_video(
-            video="https://sstournaments.com/piyush/diuwinhack.mp4",
-            caption="Here is your DIUWIN GRAND HACK video! 🎮",
-            reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://sstournaments.com/piyush/diuwin1.apk")],
-                [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
-            ])
-        )
+# Function to upload media and store file_id
+async def upload_and_store_media(context, chat_id, media_type, media_url, hack_type):
+    if media_type == "video":
+        media = await context.bot.send_video(chat_id=chat_id, video=media_url, caption=f"Here is your {hack_type} video! 🎮")
+    elif media_type == "audio":
+        media = await context.bot.send_audio(chat_id=chat_id, audio=media_url, caption=f"Here is your {hack_type} audio! 🎧")
+    elif media_type == "image":
+        media = await context.bot.send_photo(chat_id=chat_id, photo=media_url, caption=f"Here is your {hack_type} image! 🖼")
+    elif media_type == "apk":
+        media = await context.bot.send_document(chat_id=chat_id, document=media_url, caption=f"Here is your {hack_type} APK! 📱")
 
-        # Send an audio file after the video
-        await query.message.reply_audio(
-            audio="https://sstournaments.com/piyush/diuwinhack.mp3",
-            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
-        )
+    return media
 
-    elif query.data == "okwin_hack":
-        # Send video first
-        await query.message.reply_video(
-            video="https://sstournaments.com/piyush/okwinhack.mp4",
-            caption="Here is your OKWIN SURE HACK video! 🎮",
-            reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://sstournaments.com/piyush/okwin4.apk")],
-                [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
-            ])
-        )
-
-        # Send an audio file after the video
-        await query.message.reply_audio(
-            audio="https://sstournaments.com/piyush/okwinhack.mp3",
-            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
-        )
-
+# Function to send media by file_id
+async def send_media_by_file_id(query, media_type, file_id):
+    if media_type == "video":
+        await query.message.reply_video(video=file_id, caption="Here's your requested video!")
+    elif media_type == "audio":
+        await query.message.reply_audio(audio=file_id, caption="Here's your requested audio!")
+    elif media_type == "image":
+        await query.message.reply_photo(photo=file_id, caption="Here's your requested image!")
+    elif media_type == "apk":
+        await query.message.reply_document(document=file_id, caption="Here's your requested APK!")
 
 # Initialize Flask web server
 app = Flask(__name__)
