@@ -79,7 +79,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif query.data == "diuwin_hack":
         # Send video first
         await query.message.reply_video(
-            video="https://sstournaments.com/piyush/okwinhack.mp4",
+            video="https://drive.google.com/uc?export=download&id=1QK4WeeHxNkEpXa0QogEgzHMoXJsrbZfr",
             caption="Here is your DIUWIN GRAND HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1lCW4quCtpVYE25xp6pO-kUGUJhriaJ5Z/view?usp=sharing")],
@@ -131,5 +131,6 @@ if __name__ == '__main__':
     def home():
         return "Bot is running..."
 
-    # Run the Flask web server to listen on a specified port (5000 by default)
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
+    # Run the Flask web server to listen on a specified port from the environment variable
+app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 10000)))  # Default to 10000 for local testing
+
