@@ -16,8 +16,8 @@ media_file_ids = {
 }
 
 # Your bot token and webhook URL
-TOKEN = 'YOUR_BOT_TOKEN'
-WEBHOOK_URL = 'https://YOUR_RENDER_APP_URL/'
+TOKEN = '7446057407:AAFsS-f-_lPLgeXM5H7ox59oCofa8cniTGk'
+WEBHOOK_URL = 'https://telegrambot-fj88.onrender.com'
 
 # Function to handle the start command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -144,7 +144,7 @@ async def set_webhook():
 # Main entry point to run the bot
 if __name__ == '__main__':
     # Set up the Telegram bot application
-    application = ApplicationBuilder().token(7446057407:AAFsS-f-_lPLgeXM5H7ox59oCofa8cniTGk).build()
+    application = ApplicationBuilder().token(TOKEN).build()
 
     # Register handlers
     application.add_handler(CommandHandler("start", start))
