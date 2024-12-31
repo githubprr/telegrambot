@@ -18,7 +18,7 @@ media_file_ids = {
 
 # Your bot token and webhook URL
 TOKEN = '7446057407:AAFsS-f-_lPLgeXM5H7ox59oCofa8cniTGk'
-WEBHOOK_URL = 'https://telegrambot-fj88.onrender.com'
+WEBHOOK_URL = 'https://telegrambot-sasf.onrender.com/'
 
 # Function to handle the start command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
