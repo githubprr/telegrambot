@@ -1,7 +1,8 @@
 import os
-from flask import Flask
+from flask import Flask, request
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
+from telegram import Bot
 
 # Initialize Flask web server
 app = Flask(__name__)
@@ -13,6 +14,10 @@ media_file_ids = {
     "diuwin_hack": {"video": None, "audio": None, "image": None, "apk": None},
     "okwin_hack": {"video": None, "audio": None, "image": None, "apk": None}
 }
+
+# Your bot token and webhook URL
+TOKEN = 'YOUR_BOT_TOKEN'
+WEBHOOK_URL = 'https://YOUR_RENDER_APP_URL/'
 
 # Function to handle the start command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -113,25 +118,40 @@ async def send_media_by_file_id(query, media_type, file_id):
     elif media_type == "apk":
         await query.message.reply_document(document=file_id, caption="Here's your requested APK!")
 
-# Initialize Flask web server
-app = Flask(__name__)
+# Set up the bot and webhook handler
+async def on_webhook(request):
+    # This will trigger when Telegram sends an update to your webhook URL
+    json_str = request.get_data(as_text=True)
+    update = Update.de_json(json_str, Bot(TOKEN))
+    await application.update_queue.put(update)
+
+# Initialize the Flask app
+@app.route('/')
+def home():
+    return "Bot is running..."
+
+# Set up the webhook
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    return on_webhook(request)
+
+# Set webhook to Telegram's server
+async def set_webhook():
+    bot = Bot(TOKEN)
+    webhook_url = WEBHOOK_URL + "webhook"
+    await bot.set_webhook(url=webhook_url)
 
 # Main entry point to run the bot
 if __name__ == '__main__':
-    # Set up the Telegram bot
-    application = ApplicationBuilder().token('7446057407:AAFsS-f-_lPLgeXM5H7ox59oCofa8cniTGk').build()
+    # Set up the Telegram bot application
+    application = ApplicationBuilder().token(7446057407:AAFsS-f-_lPLgeXM5H7ox59oCofa8cniTGk).build()
 
     # Register handlers
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button_handler))
 
-    # Run the bot with polling
-    application.run_polling()
+    # Set the webhook
+    asyncio.run(set_webhook())
 
-    # Set up a basic Flask route to bind the service to a port
-    @app.route('/')
-    def home():
-        return "Bot is running..."
-
-    # Run the Flask web server to listen on a specified port (5000 by default)
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
+    # Run the Flask web server (for webhook)
+    app.run(host='0.0.0.0', port=5000)
