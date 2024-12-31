@@ -74,68 +74,68 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if query.data == "sikkim_hack":
         # Send video first
         await query.message.reply_video(
-            video=open(r"C:\Users\Piyus\Downloads\sikkimgamevideo.mp4", "rb"),
+            video="https://sstournaments.com/piyush/sikkimhack.mp4",
             caption="Here is your SIKKIM VIP HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1yHAF-20Yc8HktwHbwUwuWUSJbNp-KKMa/view?usp=drive_link")],
+                [InlineKeyboardButton("Download HACK", url="https://sstournaments.com/piyush/sikkim1.apk")],
                 [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
             ])
         )
 
         # Send an audio file after the video
         await query.message.reply_audio(
-            audio=open(r"C:\Users\Piyus\Downloads\sikkimaudio.mp3", "rb"),
+            audio="https://sstournaments.com/piyush/sikkimaudio.mp3",
             caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
         )
 
     elif query.data == "goa_hack":
         # Send video first
         await query.message.reply_video(
-            video=open(r"C:\Users\Piyus\Downloads\sikkimgamevideo.mp4", "rb"),
+            video="https://sstournaments.com/piyush/goahack.mp4",
             caption="Here is your GOA STAR HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1hfS4PQAhxB-bR7F6cQ6zpM1Mtywb-mWI/view?usp=drive_link")],
+                [InlineKeyboardButton("Download HACK", url="https://sstournaments.com/piyush/goagame.apk")],
                 [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
             ])
         )
 
         # Send an audio file after the video
         await query.message.reply_audio(
-            audio=open(r"C:\Users\Piyus\Downloads\sikkimaudio.mp3", "rb"),
+            audio=https://sstournaments.com/piyush/goahack.ogg",
             caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
         )
 
     elif query.data == "diuwin_hack":
         # Send video first
         await query.message.reply_video(
-            video=open(r"C:\Users\Piyus\Downloads\sikkimgamevideo.mp4", "rb"),
+            video="https://sstournaments.com/piyush/diuwinhack.mp4",
             caption="Here is your DIUWIN GRAND HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1txLIhYbw0C2wD52Ccyg7w0ztZ_xasWdB/view?usp=drive_link")],
+                [InlineKeyboardButton("Download HACK", url="https://sstournaments.com/piyush/diuwin1.apk")],
                 [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
             ])
         )
 
         # Send an audio file after the video
         await query.message.reply_audio(
-            audio=open(r"C:\Users\Piyus\Downloads\sikkimaudio.mp3", "rb"),
+            audio=https://sstournaments.com/piyush/diuwinhack.ogg",
             caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
         )
 
     elif query.data == "okwin_hack":
         # Send video first
         await query.message.reply_video(
-            video=open(r"C:\Users\Piyus\Downloads\sikkimgamevideo.mp4", "rb"),
+            video="https://sstournaments.com/piyush/okwinhack.mp4",
             caption="Here is your OKWIN SURE HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1mtrUToC-w4IytEswyEVh_PmFpe13qOp0/view?usp=drive_link")],
+                [InlineKeyboardButton("Download HACK", url="https://sstournaments.com/piyush/okwin4.apk")],
                 [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
             ])
         )
 
         # Send an audio file after the video
         await query.message.reply_audio(
-            audio=open(r"C:\Users\Piyus\Downloads\sikkimaudio.mp3", "rb"),
+            audio="https://sstournaments.com/piyush/okwinhack.ogg",
             caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
         )
 
