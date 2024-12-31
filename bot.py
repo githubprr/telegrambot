@@ -1,5 +1,6 @@
 import os
 import threading
+import asyncio
 from flask import Flask
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
@@ -124,8 +125,8 @@ def run_bot():
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button_handler))
 
-    # Run the bot with polling
-    application.run_polling()
+    # Run the bot with polling inside an event loop
+    asyncio.run(application.run_polling())
 
 # Main entry point to run the Flask server and the bot
 if __name__ == '__main__':
