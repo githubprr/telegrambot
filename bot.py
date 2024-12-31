@@ -101,7 +101,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         # Send an audio file after the video
         await query.message.reply_audio(
-            audio=https://sstournaments.com/piyush/goahack.mp3",
+            audio="https://sstournaments.com/piyush/goahack.mp3",
             caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
         )
 
@@ -118,7 +118,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         # Send an audio file after the video
         await query.message.reply_audio(
-            audio=https://sstournaments.com/piyush/diuwinhack.mp3",
+            audio="https://sstournaments.com/piyush/diuwinhack.mp3",
             caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
         )
 
@@ -139,35 +139,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
         )
 
-    # Schedule messages with their respective buttons (not needed for button handler, kept for your reference)
-    schedule = [
-        {
-            "datetime": "2024-12-31 18:24",
-            "type": "photo",
-            "path": r"C:\Users\Piyus\Documents\photo_2024-08-24_01-01-19.jpg",
-            "caption": "Scheduled Photo 1",
-            "buttons": [
-                [InlineKeyboardButton("✅SUBSCRIBE✅", url="https://example.com/1")],
-                [InlineKeyboardButton("✅SUBSCRIBE✅", url="https://example.com/share1")],
-                [InlineKeyboardButton("✅SUBSCRIBE✅", url="https://example.com/download1")]
-            ]
-        },
-        {
-            "datetime": "2024-12-31 18:25",
-            "type": "video",
-            "path": r"C:\Users\Piyus\Documents\videoplayback.mp4",
-            "caption": "Scheduled Video 1",
-            "buttons": [
-                [InlineKeyboardButton("✅SUBSCRIBE✅", url="https://example.com/2")],
-                [InlineKeyboardButton("✅SUBSCRIBE✅", url="https://example.com/share2")],
-                [InlineKeyboardButton("✅SUBSCRIBE✅", url="https://example.com/download2")]
-            ]
-        }
-    ]
-
-    # Send the scheduled messages
-    for content in schedule:
-        await send_message_at_specific_time(context, chat_id, content["type"], content, content["caption"], content["buttons"])
 
 # Main entry point to run the bot
 if __name__ == '__main__':
