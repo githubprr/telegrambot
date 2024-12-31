@@ -45,7 +45,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if query.data == "sikkim_hack":
         # Send video first
         await query.message.reply_video(
-            video="https://sstournaments.com/piyush/okwinhack.mp4",
+            video="https://sstournaments.com/piyush/sikkimhack.mp4",
             caption="Here is your SIKKIM VIP HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1_yyTL1jguLINDKf4WqokSIV1RBsQxtVV/view?usp=sharing")],
@@ -62,7 +62,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif query.data == "goa_hack":
         # Send video first
         await query.message.reply_video(
-            video="https://sstournaments.com/piyush/okwinhack.mp4",
+            video="https://sstournaments.com/piyush/goahack.mp4",
             caption="Here is your GOA STAR HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1rFi61Rn3Hkd_Z20Tcwo9cwWhufdeEmVk/view?usp=sharing")],
@@ -79,7 +79,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif query.data == "diuwin_hack":
         # Send video first
         await query.message.reply_video(
-            video="https://sstournaments.com/piyush/okwinhack.mp4",
+            video="https://sstournaments.com/piyush/diuwinhack.mp4",
             caption="Here is your DIUWIN GRAND HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1lCW4quCtpVYE25xp6pO-kUGUJhriaJ5Z/view?usp=sharing")],
