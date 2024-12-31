@@ -55,7 +55,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Instant photo message with interactive buttons (This is the only instance of photo sending now)
     await context.bot.send_photo(
         chat_id=chat_id,
-        photo="https://drive.google.com/uc?id=19p7j4tb9vIz_Ff6vAbcA_cMgnQLasC0O",
+        photo="https://sstournaments.com/piyush/image2.jpg",
         caption="**🛍 Apna Choice ke according Color Prediciton Master Hack choose karo.💸 Tumhare paas mauka hai profit wale VIP Hacks Ko Free Mai Lene Ka.**",
         reply_markup=InlineKeyboardMarkup([
             [InlineKeyboardButton("✅SIKKIM VIP HACK✅", callback_data="sikkim_hack")],
