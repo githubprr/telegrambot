@@ -1,4 +1,5 @@
 import os
+import threading
 from flask import Flask
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
@@ -111,12 +112,8 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 
-# Initialize Flask web server
-app = Flask(__name__)
-
-# Main entry point to run the bot
-if __name__ == '__main__':
-    # Set up the Telegram bot
+# Function to run the bot in a separate thread
+def run_bot():
     application = ApplicationBuilder().token('7446057407:AAFsS-f-_lPLgeXM5H7ox59oCofa8cniTGk').build()
 
     # Register handlers
@@ -125,6 +122,11 @@ if __name__ == '__main__':
 
     # Run the bot with polling
     application.run_polling()
+
+# Main entry point to run the Flask web server and the bot
+if __name__ == '__main__':
+    # Start the bot in a separate thread
+    threading.Thread(target=run_bot).start()
 
     # Set up a basic Flask route to bind the service to a port
     @app.route('/')
