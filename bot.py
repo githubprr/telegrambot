@@ -1,5 +1,6 @@
 import os
 import threading
+import asyncio
 from flask import Flask
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
@@ -111,9 +112,13 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack \n Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
         )
 
-
 # Function to run the bot in a separate thread
 def run_bot():
+    # Create a new event loop for the thread
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+
+    # Initialize the bot application
     application = ApplicationBuilder().token('7446057407:AAFsS-f-_lPLgeXM5H7ox59oCofa8cniTGk').build()
 
     # Register handlers
