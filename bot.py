@@ -46,10 +46,10 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if query.data == "sikkim_hack":
         # Send video first
         await query.message.reply_video(
-            video="https://sstournaments.com/piyush/sikkimhack.mp4",
+            video="https://drive.google.com/uc?export=download&id=1W88fuVodsBZWtF1k848_RfKcsJtzpuqt",
             caption="Here is your SIKKIM VIP HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1_yyTL1jguLINDKf4WqokSIV1RBsQxtVV/view?usp=sharing")],
+                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/uc?export=download&id=1_yyTL1jguLINDKf4WqokSIV1RBsQxtVV")],
                 [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
             ])
         )
@@ -63,10 +63,10 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif query.data == "goa_hack":
         # Send video first
         await query.message.reply_video(
-            video="https://sstournaments.com/piyush/goahack.mp4",
+            video="https://drive.google.com/uc?export=download&id=1b_yPcu5HbsT-VQKOc6yw-WGdgDP9cogo",
             caption="Here is your GOA STAR HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1rFi61Rn3Hkd_Z20Tcwo9cwWhufdeEmVk/view?usp=sharing")],
+                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/uc?export=download&id=1rFi61Rn3Hkd_Z20Tcwo9cwWhufdeEmVk")],
                 [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
             ])
         )
@@ -80,10 +80,10 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif query.data == "diuwin_hack":
         # Send video first
         await query.message.reply_video(
-            video="https://sstournaments.com/piyush/diuwinhack.mp4",
+            video="https://drive.google.com/uc?export=download&id=1QK4WeeHxNkEpXa0QogEgzHMoXJsrbZfr",
             caption="Here is your DIUWIN GRAND HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1lCW4quCtpVYE25xp6pO-kUGUJhriaJ5Z/view?usp=sharing")],
+                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/uc?export=download&id=1lCW4quCtpVYE25xp6pO-kUGUJhriaJ5Z")],
                 [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
             ])
         )
@@ -100,7 +100,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             video="https://sstournaments.com/piyush/okwinhack.mp4",
             caption="Here is your OKWIN SURE HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1C1mimf21Eecb_2pTgaTehTqDssOaAKa_/view?usp=sharing")],
+                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/uc?export=download&id=1C1mimf21Eecb_2pTgaTehTqDssOaAKa_")],
                 [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
             ])
         )
