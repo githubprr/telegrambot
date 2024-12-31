@@ -51,7 +51,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_photo(
         chat_id=chat_id,
         photo="https://drive.google.com/uc?id=19p7j4tb9vIz_Ff6vAbcA_cMgnQLasC0O",
-        caption="**Yeh mera main channel hai, jaha mein apna kaam dikhata hu. Mere channel ko subscribe kree, aur latest khabre prapt kree.🔥**",
+        caption="Yeh mera main channel hai, jaha mein apna kaam dikhata hu. Mere channel ko subscribe kree, aur latest khabre prapt kree.🔥",
         reply_markup=InlineKeyboardMarkup([ 
             [InlineKeyboardButton("✅SUBSCRIBE✅", url="https://t.me/+5icz2F7eIn0zZDI1")]
         ])
@@ -61,7 +61,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_photo(
         chat_id=chat_id,
         photo="https://sstournaments.com/piyush/image2.jpg",
-        caption="**🛍 Apna Choice ke according Color Prediciton Master Hack choose karo.💸 Tumhare paas mauka hai profit wale VIP Hacks Ko Free Mai Lene Ka.**",
+        caption="🛍 **Apna** Choice ke according Color Prediciton Master Hack choose karo.💸 Tumhare paas mauka hai profit wale VIP Hacks Ko Free Mai Lene Ka.",
         reply_markup=InlineKeyboardMarkup([
             [InlineKeyboardButton("✅SIKKIM VIP HACK✅", callback_data="sikkim_hack")],
             [InlineKeyboardButton("✅GOA STAR HACK✅", callback_data="goa_hack")],
@@ -82,7 +82,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             video="https://sstournaments.com/piyush/sikkimhack.mp4",
             caption="Here is your SIKKIM VIP HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://sstournaments.com/piyush/sikkim1.apk")],
+                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1_yyTL1jguLINDKf4WqokSIV1RBsQxtVV/view?usp=sharing")],
                 [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
             ])
         )
@@ -90,7 +90,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # Send an audio file after the video
         await query.message.reply_audio(
             audio="https://sstournaments.com/piyush/sikkimaudio.mp3",
-            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
+            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack <br> Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
         )
 
     elif query.data == "goa_hack":
@@ -99,7 +99,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             video="https://sstournaments.com/piyush/goahack.mp4",
             caption="Here is your GOA STAR HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://sstournaments.com/piyush/goagame.apk")],
+                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1rFi61Rn3Hkd_Z20Tcwo9cwWhufdeEmVk/view?usp=sharing")],
                 [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
             ])
         )
@@ -107,7 +107,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # Send an audio file after the video
         await query.message.reply_audio(
             audio="https://sstournaments.com/piyush/goahack.mp3",
-            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
+            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack <br> Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
         )
 
     elif query.data == "diuwin_hack":
@@ -116,7 +116,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             video="https://sstournaments.com/piyush/diuwinhack.mp4",
             caption="Here is your DIUWIN GRAND HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://sstournaments.com/piyush/diuwin1.apk")],
+                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1lCW4quCtpVYE25xp6pO-kUGUJhriaJ5Z/view?usp=sharing")],
                 [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
             ])
         )
@@ -124,8 +124,8 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # Send an audio file after the video
         await query.message.reply_audio(
             audio="https://sstournaments.com/piyush/diuwinhack.mp3",
-            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
-        )
+            caption = "IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack <br> Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
+    )
 
     elif query.data == "okwin_hack":
         # Send video first
@@ -133,7 +133,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             video="https://sstournaments.com/piyush/okwinhack.mp4",
             caption="Here is your OKWIN SURE HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://sstournaments.com/piyush/okwin4.apk")],
+                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1C1mimf21Eecb_2pTgaTehTqDssOaAKa_/view?usp=sharing")],
                 [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
             ])
         )
@@ -141,7 +141,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # Send an audio file after the video
         await query.message.reply_audio(
             audio="https://sstournaments.com/piyush/okwinhack.mp3",
-            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
+            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack <br> Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
         )
 
 
