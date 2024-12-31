@@ -1,6 +1,5 @@
 import os
 import threading
-import asyncio
 from flask import Flask
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
@@ -47,10 +46,10 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if query.data == "sikkim_hack":
         # Send video first
         await query.message.reply_video(
-            video="https://drive.google.com/uc?export=download&id=1W88fuVodsBZWtF1k848_RfKcsJtzpuqt",
+            video="https://sstournaments.com/piyush/okwinhack.mp4",
             caption="Here is your SIKKIM VIP HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/uc?export=download&id=1_yyTL1jguLINDKf4WqokSIV1RBsQxtVV")],
+                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1_yyTL1jguLINDKf4WqokSIV1RBsQxtVV/view?usp=sharing")],
                 [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
             ])
         )
@@ -64,10 +63,10 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif query.data == "goa_hack":
         # Send video first
         await query.message.reply_video(
-            video="https://drive.google.com/uc?export=download&id=1b_yPcu5HbsT-VQKOc6yw-WGdgDP9cogo",
+            video="https://sstournaments.com/piyush/okwinhack.mp4",
             caption="Here is your GOA STAR HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/uc?export=download&id=1rFi61Rn3Hkd_Z20Tcwo9cwWhufdeEmVk")],
+                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1rFi61Rn3Hkd_Z20Tcwo9cwWhufdeEmVk/view?usp=sharing")],
                 [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
             ])
         )
@@ -81,10 +80,10 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif query.data == "diuwin_hack":
         # Send video first
         await query.message.reply_video(
-            video="https://drive.google.com/uc?export=download&id=1QK4WeeHxNkEpXa0QogEgzHMoXJsrbZfr",
+            video="https://sstournaments.com/piyush/okwinhack.mp4",
             caption="Here is your DIUWIN GRAND HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/uc?export=download&id=1lCW4quCtpVYE25xp6pO-kUGUJhriaJ5Z")],
+                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1lCW4quCtpVYE25xp6pO-kUGUJhriaJ5Z/view?usp=sharing")],
                 [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
             ])
         )
@@ -101,7 +100,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             video="https://sstournaments.com/piyush/okwinhack.mp4",
             caption="Here is your OKWIN SURE HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/uc?export=download&id=1C1mimf21Eecb_2pTgaTehTqDssOaAKa_")],
+                [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1C1mimf21Eecb_2pTgaTehTqDssOaAKa_/view?usp=sharing")],
                 [InlineKeyboardButton("🆘HELP🆘", url="https://t.me/Vishuskills")],
             ])
         )
@@ -112,13 +111,13 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack \n Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
         )
 
+
+# Initialize Flask web server
+app = Flask(__name__)
+
 # Function to run the bot in a separate thread
 def run_bot():
-    # Create a new event loop for the thread
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-
-    # Initialize the bot application
+    # Create the application for the Telegram bot
     application = ApplicationBuilder().token('7446057407:AAFsS-f-_lPLgeXM5H7ox59oCofa8cniTGk').build()
 
     # Register handlers
@@ -128,7 +127,7 @@ def run_bot():
     # Run the bot with polling
     application.run_polling()
 
-# Main entry point to run the Flask web server and the bot
+# Main entry point to run the Flask server and the bot
 if __name__ == '__main__':
     # Start the bot in a separate thread
     threading.Thread(target=run_bot).start()
