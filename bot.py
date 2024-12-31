@@ -79,7 +79,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif query.data == "diuwin_hack":
         # Send video first
         await query.message.reply_video(
-            video="https://drive.google.com/uc?export=download&id=1QK4WeeHxNkEpXa0QogEgzHMoXJsrbZfr",
+            video="https://sstournaments.com/piyush/diuwinhack.mp3",
             caption="Here is your DIUWIN GRAND HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton("Download HACK", url="https://drive.google.com/file/d/1lCW4quCtpVYE25xp6pO-kUGUJhriaJ5Z/view?usp=sharing")],
