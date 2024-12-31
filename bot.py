@@ -6,40 +6,6 @@ from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandle
 # Initialize Flask web server
 app = Flask(__name__)
 
-# Function to send scheduled messages
-async def send_message_at_specific_time(context: ContextTypes.DEFAULT_TYPE, chat_id, message_type, content, caption, buttons):
-    from datetime import datetime
-    import asyncio
-
-    now = datetime.now()
-    scheduled_time = datetime.strptime(content["datetime"], "%Y-%m-%d %H:%M")
-
-    # Calculate delay
-    delay = (scheduled_time - now).total_seconds()
-
-    if delay > 0:  # Wait if the scheduled time is in the future
-        print(f"Waiting {delay} seconds until {content['datetime']} to send message.")
-        await asyncio.sleep(delay)
-
-    # Send the message
-    if message_type == "photo":
-        with open(content["path"], "rb") as file:
-            await context.bot.send_photo(
-                chat_id=chat_id,
-                photo=file,
-                caption=caption,
-                reply_markup=InlineKeyboardMarkup(buttons),
-            )
-    elif message_type == "video":
-        with open(content["path"], "rb") as file:
-            await context.bot.send_video(
-                chat_id=chat_id,
-                video=file,
-                caption=caption,
-                reply_markup=InlineKeyboardMarkup(buttons),
-            )
-    print(f"Message sent at {datetime.now()} for scheduled time {content['datetime']}.")
-
 # Function to handle the start command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
@@ -57,7 +23,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ])
     )
 
-    # Instant photo message with interactive buttons (This is the only instance of photo sending now)
+    # Instant photo message with interactive buttons
     await context.bot.send_photo(
         chat_id=chat_id,
         photo="https://sstournaments.com/piyush/image2.jpg",
@@ -90,7 +56,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # Send an audio file after the video
         await query.message.reply_audio(
             audio="https://sstournaments.com/piyush/sikkimaudio.mp3",
-            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack <br> Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
+            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack \n Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
         )
 
     elif query.data == "goa_hack":
@@ -107,7 +73,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # Send an audio file after the video
         await query.message.reply_audio(
             audio="https://sstournaments.com/piyush/goahack.mp3",
-            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack <br> Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
+            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack \n Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
         )
 
     elif query.data == "diuwin_hack":
@@ -124,8 +90,8 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # Send an audio file after the video
         await query.message.reply_audio(
             audio="https://sstournaments.com/piyush/diuwinhack.mp3",
-            caption = "IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack <br> Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
-    )
+            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack \n Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
+        )
 
     elif query.data == "okwin_hack":
         # Send video first
@@ -141,7 +107,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # Send an audio file after the video
         await query.message.reply_audio(
             audio="https://sstournaments.com/piyush/okwinhack.mp3",
-            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack <br> Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
+            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack \n Register Link ✨ http://www.sikkim7.com/#/register?invitationCode=73728400111"
         )
 
 
