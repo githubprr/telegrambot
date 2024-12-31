@@ -3,6 +3,7 @@ from flask import Flask, request
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
 from telegram import Bot
+import asyncio
 
 # Initialize Flask web server
 app = Flask(__name__)
