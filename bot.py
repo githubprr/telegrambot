@@ -1,10 +1,16 @@
-import asyncio
-from datetime import datetime
+import os
+from flask import Flask
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
 
+# Initialize Flask web server
+app = Flask(__name__)
+
 # Function to send scheduled messages
 async def send_message_at_specific_time(context: ContextTypes.DEFAULT_TYPE, chat_id, message_type, content, caption, buttons):
+    from datetime import datetime
+    import asyncio
+
     now = datetime.now()
     scheduled_time = datetime.strptime(content["datetime"], "%Y-%m-%d %H:%M")
 
@@ -47,7 +53,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         photo="https://drive.google.com/uc?id=19p7j4tb9vIz_Ff6vAbcA_cMgnQLasC0O",
         caption="**Yeh mera main channel hai, jaha mein apna kaam dikhata hu. Mere channel ko subscribe kree, aur latest khabre prapt kree.🔥**",
         reply_markup=InlineKeyboardMarkup([ 
-            [InlineKeyboardButton("✅SUBSCRIBE✅", url="https://t.me/+5icz2F7eIn0zZDI1")],
             [InlineKeyboardButton("✅SUBSCRIBE✅", url="https://t.me/+5icz2F7eIn0zZDI1")]
         ])
     )
@@ -140,13 +145,25 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 
+# Initialize Flask web server
+app = Flask(__name__)
+
 # Main entry point to run the bot
 if __name__ == '__main__':
+    # Set up the Telegram bot
     application = ApplicationBuilder().token('7446057407:AAFsS-f-_lPLgeXM5H7ox59oCofa8cniTGk').build()
 
     # Register handlers
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button_handler))
 
-    # Run the bot
+    # Run the bot with polling
     application.run_polling()
+
+    # Set up a basic Flask route to bind the service to a port
+    @app.route('/')
+    def home():
+        return "Bot is running..."
+
+    # Run the Flask web server to listen on a specified port (5000 by default)
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
