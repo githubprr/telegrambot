@@ -1,4 +1,5 @@
-import os
+# import os
+import threading
 from flask import Flask
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
@@ -114,23 +115,29 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Initialize Flask web server
 app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return "Bot is running..."
+@app.route('/test')
+def test():
+    return "Test Bot is running..."
 # Main entry point to run the bot
-if __name__ == '__main__':
-    # Set up the Telegram bot
-    application = ApplicationBuilder().token('7446057407:AAFsS-f-_lPLgeXM5H7ox59oCofa8cniTGk').build()
 
-    # Register handlers
+# Function to run the Telegram bot
+def run_telegram_bot():
+    application = ApplicationBuilder().token('7446057407:AAFsS-f-_lPLgeXM5H7ox59oCofa8cniTGk').build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button_handler))
-
-    # Run the bot with polling
     application.run_polling()
 
-    # Set up a basic Flask route to bind the service to a port
-    @app.route('/')
-    def home():
-        return "Bot is running..."
+# Function to run the Flask server
+def run_flask():
+    # public_url = ngrok.connect(10000)  # Expose Flask app
+    # print(f"Flask app is running at {public_url}")
+    app.run(host='0.0.0.0', port=10000)
 
-    # Run the Flask web server to listen on a specified port from the environment variable
-app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 10000)))  # Default to 10000 for local testing
-
+# Main entry point
+if __name__ == '__main__':
+    # Start Flask and Telegram bot in parallel threads
+    threading.Thread(target=run_flask).start()
+    run_telegram_bot()
