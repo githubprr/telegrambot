@@ -1,3 +1,4 @@
+# Required imports
 import threading
 from flask import Flask
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
@@ -17,7 +18,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_photo(
         chat_id=chat_id,
         photo="https://drive.google.com/uc?id=19p7j4tb9vIz_Ff6vAbcA_cMgnQLasC0O",
-        caption="Yeh mera main channel hai, jaha mein apna kaam dikhata hu. Mere channel ko subscribe kree, aur latest khabre prapt kree.🔥",
+        caption="<b>Subscribe to my channel for updates!🔥</b>",
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✅SUBSCRIBE✅", url="https://t.me/+5icz2F7eIn0zZDI1")]])
     )
 
@@ -25,7 +26,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_photo(
         chat_id=chat_id,
         photo="https://sstournaments.com/piyush/image2.jpg",
-        caption="🛍Apna Choice ke according Color Prediciton Master Hack choose karo.💸 Tumhare paas mauka hai profit wale VIP Hacks Ko Free Mai Lene Ka.💸",
+        caption="Choose your preferred Color Prediction Master Hack!💸",
         reply_markup=InlineKeyboardMarkup([
             [InlineKeyboardButton("✅SIKKIM VIP HACK✅", callback_data="sikkim_hack")],
             [InlineKeyboardButton("✅GOA STAR HACK✅", callback_data="goa_hack")],
@@ -42,34 +43,33 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Video and audio responses based on button clicked
     hack_data = {
         "sikkim_hack": {
-            "video": "AgADLBUAAlIvmFc",  # Replace with your actual file_id for the Sikkim video
+            "video": "https://file-to-link-nx-ccf8d5eda5c0.herokuapp.com/dl/6777ceb13aaf8bb8c01b0f8b",
             "caption": "Here is your SIKKIM VIP HACK video! 🎮",
-            "audio": "AgADrBUAAlIvmFc",  # Replace with your actual file_id for the Sikkim audio
+            "audio": "https://sstournaments.com/piyush/sikkimaudio.mp3",
             "audio_caption": "<b>Listen to activate hack 🌟 Register: http://www.sikkim7.com/#/register?invitationCode=73728400111</b>"
         },
         "goa_hack": {
-            "video": "AgADKhUAAlIvmFc",  # Replace with your actual file_id for the Goa video
+            "video": "https://file-to-link-nx-ccf8d5eda5c0.herokuapp.com/dl/6777cede3aaf8bb8c01b0f91",
             "caption": "Here is your GOA STAR HACK video! 🎮",
-            "audio": "AgADpBUAAlIvmFc",  # Replace with your actual file_id for the Goa audio
+            "audio": "https://sstournaments.com/piyush/goahack.mp3",
             "audio_caption": "Listen to activate hack 🌟 Register: https://www.bing009.com/#/register?invitationCode=416623809168"
         },
         "diuwin_hack": {
-            "video": "AgADJRUAAlIvmFc",  # Replace with your actual file_id for the Diuwin video
+            "video": "https://file-to-link-nx-ccf8d5eda5c0.herokuapp.com/dl/6777ce263aaf8bb8c01b0f86",
             "caption": "Here is your DIUWIN GRAND HACK video! 🎮",
-            "audio": "AgADqBUAAlIvmFc",  # Replace with your actual file_id for the Diuwin audio
+            "audio": "https://sstournaments.com/piyush/diuwinhack.mp3",
             "audio_caption": "Listen to activate hack 🌟 Register: https://diuwinapp.pro/#/register?invitationCode=42677100202"
         },
         "okwin_hack": {
-            "video": "AgADJxUAAlIvmFc",  # Replace with your actual file_id for the Okwin video
+            "video": "https://sstournaments.com/piyush/okwinhack.mp4",
             "caption": "Here is your OKWIN SURE HACK video! 🎮",
-            "audio": "AgADtBUAAlIvmFc",  # Replace with your actual file_id for the Okwin audio
+            "audio": "https://sstournaments.com/piyush/okwinhack.mp3",
             "audio_caption": "Listen to activate hack 🌟 Register: https://www.okowin.com/#/register?invitationCode=282452739393"
         }
     }
 
     if query.data in hack_data:
         hack = hack_data[query.data]
-        # Send video and audio using file_id
         await query.message.reply_video(video=hack["video"], caption=hack["caption"])
         await query.message.reply_audio(audio=hack["audio"], caption=hack["audio_caption"])
 
