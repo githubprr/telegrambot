@@ -84,7 +84,7 @@ def test():
 
 # Run Telegram bot
 def run_telegram_bot():
-    application = ApplicationBuilder().token("YOUR_BOT_TOKEN").build()
+    application = ApplicationBuilder().token("7446057407:AAFsS-f-_lPLgeXM5H7ox59oCofa8cniTGk").build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button_handler))
     application.run_polling()
