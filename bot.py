@@ -1,4 +1,3 @@
-# Required imports
 import threading
 from flask import Flask
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
@@ -43,33 +42,34 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Video and audio responses based on button clicked
     hack_data = {
         "sikkim_hack": {
-            "video": "AgADLBUAAlIvmFc",
+            "video": "AgADLBUAAlIvmFc",  # Replace with your actual file_id for the Sikkim video
             "caption": "Here is your SIKKIM VIP HACK video! 🎮",
-            "audio": "https://sstournaments.com/piyush/sikkimaudio.mp3",
+            "audio": "AgADrBUAAlIvmFc",  # Replace with your actual file_id for the Sikkim audio
             "audio_caption": "<b>Listen to activate hack 🌟 Register: http://www.sikkim7.com/#/register?invitationCode=73728400111</b>"
         },
         "goa_hack": {
-            "video": "AgADKhUAAlIvmFc",
+            "video": "AgADKhUAAlIvmFc",  # Replace with your actual file_id for the Goa video
             "caption": "Here is your GOA STAR HACK video! 🎮",
-            "audio": "https://sstournaments.com/piyush/goahack.mp3",
+            "audio": "AgADpBUAAlIvmFc",  # Replace with your actual file_id for the Goa audio
             "audio_caption": "Listen to activate hack 🌟 Register: https://www.bing009.com/#/register?invitationCode=416623809168"
         },
         "diuwin_hack": {
-            "video": "AgADJRUAAlIvmFc",
+            "video": "AgADJRUAAlIvmFc",  # Replace with your actual file_id for the Diuwin video
             "caption": "Here is your DIUWIN GRAND HACK video! 🎮",
-            "audio": "https://sstournaments.com/piyush/diuwinhack.mp3",
+            "audio": "AgADqBUAAlIvmFc",  # Replace with your actual file_id for the Diuwin audio
             "audio_caption": "Listen to activate hack 🌟 Register: https://diuwinapp.pro/#/register?invitationCode=42677100202"
         },
         "okwin_hack": {
-            "video": "AgADJxUAAlIvmFc",
+            "video": "AgADJxUAAlIvmFc",  # Replace with your actual file_id for the Okwin video
             "caption": "Here is your OKWIN SURE HACK video! 🎮",
-            "audio": "https://sstournaments.com/piyush/okwinhack.mp3",
+            "audio": "AgADtBUAAlIvmFc",  # Replace with your actual file_id for the Okwin audio
             "audio_caption": "Listen to activate hack 🌟 Register: https://www.okowin.com/#/register?invitationCode=282452739393"
         }
     }
 
     if query.data in hack_data:
         hack = hack_data[query.data]
+        # Send video and audio using file_id
         await query.message.reply_video(video=hack["video"], caption=hack["caption"])
         await query.message.reply_audio(audio=hack["audio"], caption=hack["audio_caption"])
 
