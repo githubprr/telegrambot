@@ -43,25 +43,25 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Video and audio responses based on button clicked
     hack_data = {
         "sikkim_hack": {
-            "video": "AAMCBQADGQEBvI56Z3fqponIsx9pVbDYbpUKeborc0UAAiwVAAJSL5hXxI4dfw1v714BAAdtAAM2BA",
+            "video": "AgADLBUAAlIvmFc",
             "caption": "Here is your SIKKIM VIP HACK video! 🎮",
             "audio": "https://sstournaments.com/piyush/sikkimaudio.mp3",
             "audio_caption": "<b>Listen to activate hack 🌟 Register: http://www.sikkim7.com/#/register?invitationCode=73728400111</b>"
         },
         "goa_hack": {
-            "video": "AAMCBQADGQEBvI5zZ3fqkE0B7fCfikIh0I-7Xb-np9sAAioVAAJSL5hXkUXKbyxC_64BAAdtAAM2BA",
+            "video": "AgADKhUAAlIvmFc",
             "caption": "Here is your GOA STAR HACK video! 🎮",
             "audio": "https://sstournaments.com/piyush/goahack.mp3",
             "audio_caption": "Listen to activate hack 🌟 Register: https://www.bing009.com/#/register?invitationCode=416623809168"
         },
         "diuwin_hack": {
-            "video": "AAMCBQADGQEBvI4wZ3fpsn6wz5ZRVhzaZNVmeAiKesgAAiUVAAJSL5hXY4wS_65G2tsBAAdtAAM2BA",
+            "video": "AgADJRUAAlIvmFc",
             "caption": "Here is your DIUWIN GRAND HACK video! 🎮",
             "audio": "https://sstournaments.com/piyush/diuwinhack.mp3",
             "audio_caption": "Listen to activate hack 🌟 Register: https://diuwinapp.pro/#/register?invitationCode=42677100202"
         },
         "okwin_hack": {
-            "video": "AAMCBQADGQEBvI5cZ3fqWnCv8knorYhoYtDEl2_UFVwAAicVAAJSL5hXPzZrUGtrYGABAAdtAAM2BA",
+            "video": "AgADJxUAAlIvmFc",
             "caption": "Here is your OKWIN SURE HACK video! 🎮",
             "audio": "https://sstournaments.com/piyush/okwinhack.mp3",
             "audio_caption": "Listen to activate hack 🌟 Register: https://www.okowin.com/#/register?invitationCode=282452739393"
