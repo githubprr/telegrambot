@@ -70,7 +70,12 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if query.data in hack_data:
         hack = hack_data[query.data]
-        await query.message.reply_video(video=hack["video"], caption=hack["caption"])
+        # Sending video as document to preserve quality
+        await query.message.reply_document(
+            document=hack["video"],
+            caption=hack["caption"]
+        )
+        # Sending audio
         await query.message.reply_audio(audio=hack["audio"], caption=hack["audio_caption"])
 
 # Flask endpoints
