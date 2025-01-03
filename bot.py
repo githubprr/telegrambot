@@ -144,11 +144,94 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             video="https://sstournaments.com/piyush/okwinhack.mp4",
             caption="Here is your OKWIN SURE HACK video! 🎮",
             reply_markup=InlineKeyboardMarkup([
+# Function to handle button clicks
+async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()  # Acknowledge the button click
+
+    # Checking the callback data and sending video + audio
+    if query.data == "sikkim_hack":
+        # Send updated video for Sikkim
+        await query.message.reply_video(
+            video="https://file-to-link-nx-ccf8d5eda5c0.herokuapp.com/dl/6777ceb13aaf8bb8c01b0f8b",
+            caption="Here is your SIKKIM VIP HACK video! 🎮",
+            reply_markup=InlineKeyboardMarkup([
                 [
                     InlineKeyboardButton(
                         "Download HACK",
-                        url=
-                        "https://drive.google.com/file/d/1C1mimf21Eecb_2pTgaTehTqDssOaAKa_/view?usp=sharing"
+                        url="https://drive.google.com/file/d/1_yyTL1jguLINDKf4WqokSIV1RBsQxtVV/view?usp=sharing"
+                    )
+                ],
+                [
+                    InlineKeyboardButton("🆘HELP🆘",
+                                         url="https://t.me/Vishuskills")
+                ],
+            ]))
+
+        # Send an audio file after the video
+        await query.message.reply_audio(
+            audio="https://sstournaments.com/piyush/sikkimaudio.mp3",
+            caption="<b>IMPORTANT AUDIO ⭐️⭐️ Listen Full For Activate Hack 🌟 /n Hack Register Link ✨✨ http://www.sikkim7.com/#/register?invitationCode=73728400111</b>"
+        )
+
+    elif query.data == "goa_hack":
+        # Send updated video for Goa
+        await query.message.reply_video(
+            video="https://file-to-link-nx-ccf8d5eda5c0.herokuapp.com/dl/6777cede3aaf8bb8c01b0f91",
+            caption="Here is your GOA STAR HACK video! 🎮",
+            reply_markup=InlineKeyboardMarkup([
+                [
+                    InlineKeyboardButton(
+                        "Download HACK",
+                        url="https://drive.google.com/file/d/1rFi61Rn3Hkd_Z20Tcwo9cwWhufdeEmVk/view?usp=sharing"
+                    )
+                ],
+                [
+                    InlineKeyboardButton("🆘HELP🆘",
+                                         url="https://t.me/Vishuskills")
+                ],
+            ]))
+
+        # Send an audio file after the video
+        await query.message.reply_audio(
+            audio="https://sstournaments.com/piyush/goahack.mp3",
+            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨✨https://www.bing009.com/#/register?invitationCode=416623809168"
+        )
+
+    elif query.data == "diuwin_hack":
+        # Send updated video for DiuWin
+        await query.message.reply_video(
+            video="https://file-to-link-nx-ccf8d5eda5c0.herokuapp.com/dl/6777ce263aaf8bb8c01b0f86",
+            caption="Here is your DIUWIN GRAND HACK video! 🎮",
+            reply_markup=InlineKeyboardMarkup([
+                [
+                    InlineKeyboardButton(
+                        "Download HACK",
+                        url="https://drive.google.com/file/d/1lCW4quCtpVYE25xp6pO-kUGUJhriaJ5Z/view?usp=sharing"
+                    )
+                ],
+                [
+                    InlineKeyboardButton("🆘HELP🆘",
+                                         url="https://t.me/Vishuskills")
+                ],
+            ]))
+
+        # Send an audio file after the video
+        await query.message.reply_audio(
+            audio="https://sstournaments.com/piyush/diuwinhack.mp3",
+            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟 Hack Register Link ✨✨ https://diuwinapp.pro/#/register?invitationCode=42677100202 /n 24x7 Support ~ @Vishuskills"
+        )
+
+    elif query.data == "okwin_hack":
+        # Send video for OKWIN (unchanged)
+        await query.message.reply_video(
+            video="https://sstournaments.com/piyush/okwinhack.mp4",
+            caption="Here is your OKWIN SURE HACK video! 🎮",
+            reply_markup=InlineKeyboardMarkup([
+                [
+                    InlineKeyboardButton(
+                        "Download HACK",
+                        url="https://drive.google.com/file/d/1C1mimf21Eecb_2pTgaTehTqDssOaAKa_/view?usp=sharing"
                     )
                 ],
                 [
@@ -160,10 +243,8 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # Send an audio file after the video
         await query.message.reply_audio(
             audio="https://sstournaments.com/piyush/okwinhack.mp3",
-            caption=
-            "IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨✨https://www.okowin.com/#/register?invitationCode=282452739393 /n 24x7 Support ~ @Vishuskills"
+            caption="IMPORTANT AUDIO ⭐️⭐️Listen Full For Activate Hack 🌟Hack Register Link ✨✨https://www.okowin.com/#/register?invitationCode=282452739393 /n 24x7 Support ~ @Vishuskills"
         )
-
 
 # Initialize Flask web server
 app = Flask(__name__)
