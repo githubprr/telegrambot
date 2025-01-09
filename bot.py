@@ -42,35 +42,35 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Video file IDs, audio file links, and captions for each hack
     hack_data = {
         "sikkim_hack": {
-            "video": "BAACAgUAAxkBAAMJZ4AuXlxgQqMD85aOAyggbKVz6p0AAicVAAJSL5hX1q9yAbuNEt42BA",
+            "video": "BAACAgUAAxkBAAIFQ2eAOe5opaSq7JJdWVqrLC-X0LEOAAIsFQACUi-YV2dFPleZscusNgQ",
             "caption": "Here is your SIKKIM VIP HACK video! 🎮",
-            "audio": "CQACAgUAAxkBAAMsZ4AzrUftaLfSRysln_syY6B-L84AApoSAAKYkQABVCyhw83picDwNgQ",
+            "audio": "CQACAgUAAxkBAAIFSWeAOiQz7gvpHAWOjqCJM0HobBtqAAKaEgACmJEAAVR7IngSjkXofTYE",
             "audio_caption": "Listen to activate hack 🌟 Register: http://www.sikkim7.com/#/register?invitationCode=73728400111",
-            "apk": "BQACAgUAAxkBAAM2Z4A2HW9VF_DBBG22cjtDAWrlOTIAAqISAAKYkQABVF0j9ulVjh1dNgQ",
+            "apk": "BQACAgUAAxkBAAIFUWeAOmX_kgABXmwrS5tReBEf1zPKawACohIAApiRAAFUDlhg__DwTCs2BA",
             "apk_caption": "Install this APK to complete the setup for SIKKIM VIP HACK 📱"
         },
         "goa_hack": {
-            "video": "BAACAgUAAxkBAAMDZ4AtCw6kcCEMNnw_iPxkF3cDhkkAAioVAAJSL5hXDOa_YxKmrOE2BA",
+            "video": "BAACAgUAAxkBAAIFQWeAOdn7lqUmBq-ITbqTadYrxY_UAAIqFQACUi-YV0DfcIG18QsTNgQ",
             "caption": "Here is your GOA STAR HACK video! 🎮",
-            "audio": "CQACAgUAAxkBAAMuZ4Azwym6eVX65Y2nQNOtpfUl6lAAApsSAAKYkQABVC-gm-lRljJnNgQ",
+            "audio": "CQACAgUAAxkBAAIFS2eAOjPn0KdFdeEAAWMuUweLDLggNgACmxIAApiRAAFU6SxTFtK5DUk2BA",
             "audio_caption": "Listen to activate hack 🌟 Register: https://www.bing009.com/#/register?invitationCode=416623809168",
-            "apk": "BQACAgUAAxkBAAM4Z4A2UYJm7pcN5URzbJB8j2R2C5sAAqMSAAKYkQABVPvubyoExccFNgQ",
+            "apk": "BQACAgUAAxkBAAIFU2eAOnbRKkBMcXxXwamNLWZ1qrLFAAKjEgACmJEAAVRN0eyjLcLhSDYE",
             "apk_caption": "Install this APK to complete the setup for GOA STAR HACK 📱"
         },
         "diuwin_hack": {
-            "video": "BAACAgUAAxkBAAMVZ4AvAAFKugxu0xXzJWKyAgHRaK_YAAIlFQACUi-YV23guxciLQ0dNgQ",
+            "video": "BAACAgUAAxkBAAIFRWeAOf_EbK1vELSPelyURuedS4mpAAIlFQACUi-YV1tU16AUCZT6NgQ",
             "caption": "Here is your DIUWIN GRAND HACK video! 🎮",
-            "audio": "CQACAgUAAxkBAAMwZ4Az3vJt739YDY85Y6mtI23AqJAAApwSAAKYkQABVNyQOcy2AYQ9NgQ",
+            "audio": "CQACAgUAAxkBAAIFTWeAOkLGn32xjcK6A3BEzCqFs5a3AAKcEgACmJEAAVSC4M7nMebJ0DYE",
             "audio_caption": "Listen to activate hack 🌟 Register: https://diuwinapp.pro/#/register?invitationCode=42677100202",
-            "apk": "BQACAgUAAxkBAAM6Z4A2ZryX4FEkU2Wb1VTN3Mj5VnoAAqQSAAKYkQABVI92RancblNhNgQ",
+            "apk": "BQACAgUAAxkBAAIFVWeAOoTBs2wb6JfzAlwU7UNBWydqAAKkEgACmJEAAVSs9mEiy1S7kTYE",
             "apk_caption": "Install this APK to complete the setup for DIUWIN GRAND HACK 📱"
         },
         "okwin_hack": {
-            "video": "BAACAgUAAxkBAAMTZ4Au9_kqCAT_0VoxjqwKVqtFcOAAAiwVAAJSL5hX62NsRnhGekY2BA",
+            "video": "BAACAgUAAxkBAAIFR2eAOhB1gie6sAYYsQdImO4OD5uvAAInFQACUi-YV6lnP25EkisMNgQ",
             "caption": "Here is your OKWIN SURE HACK video! 🎮",
-            "audio": "CQACAgUAAxkBAAMyZ4Az8Nr47MZY_z5z-0TE4LI2sPYAAp0SAAKYkQABVK7olxLQR2X2NgQ",
+            "audio": "CQACAgUAAxkBAAIFT2eAOlD14d3qKLvfnxQOi-qtVdTeAAKdEgACmJEAAVTYKP70xt2zojYE",
             "audio_caption": "Listen to activate hack 🌟 Register: https://www.okowin.com/#/register?invitationCode=282452739393",
-            "apk": "BQACAgUAAxkBAAM8Z4A2hULLaaOX5C0zas3MvhENL8YAAqUSAAKYkQABVK9pjN86d72INgQ",
+            "apk": "BQACAgUAAxkBAAIFV2eAOpPDdEHIne843nNqHhiKf6InAAKlEgACmJEAAVSOa7SdBd1b2TYE",
             "apk_caption": "Install this APK to complete the setup for OKWIN SURE HACK 📱"
         }
     }
