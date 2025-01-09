@@ -49,7 +49,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "audio_caption": "<b>Listen to activate hack 🌟 Register: http://www.sikkim7.com/#/register?invitationCode=73728400111</b>"
         },
         "goa_hack": {
-            "video": "https://file-to-link-nx-ccf8d5eda5c0.herokuapp.com/dl/6777cede3aaf8bb8c01b0f91",
+            "video": "https://file-to-link-nx-ccf8d5eda5c0.herokuapp.com/dl/67801bd202ec246f4678cbc4",
             "caption": "Here is your GOA STAR HACK video! 🎮",
             "audio": "https://sstournaments.com/piyush/goahack.mp3",
             "audio_caption": "Listen to activate hack 🌟 Register: https://www.bing009.com/#/register?invitationCode=416623809168"
