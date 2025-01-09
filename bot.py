@@ -1,23 +1,23 @@
-# Required imports
+import os
 import re
 import threading
 from flask import Flask
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
 
-# Initialize Flask web server
+# Flask initialization
 app = Flask(__name__)
 
-# Helper function to make text bold
+# Helper function to make text bold with MarkdownV2 escaping
 def make_bold(text):
-    escaped_text = re.sub(r"([_*\[\]()~`>#+\-=|{}.!])", r"\\\1", text)  # Escape reserved characters
+    escaped_text = re.sub(r"([_*()~`>#+\-=|{}.!])", r"\\\1", text)  # Escape reserved characters
     return f"*{escaped_text}*"
 
-# Function to handle the /start command
+# Command handler for /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
 
-    # Welcome message with bold text
+    # Welcome message
     await context.bot.send_message(
         chat_id=chat_id,
         text=make_bold("Welcome to the 🤑 Casino Hack Bot 🎲"),
@@ -55,12 +55,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         parse_mode="MarkdownV2"
     )
 
-# Function to handle button interactions
+# Callback handler for button presses
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()  # Acknowledge button press
 
-    # Video file IDs, audio file links, and captions for each hack
+    # Hack data
     hack_data = {
         "sikkim_hack": {
             "video": "BAACAgUAAxkBAAIFQ2eAOe5opaSq7JJdWVqrLC-X0LEOAAIsFQACUi-YV2dFPleZscusNgQ",
@@ -99,48 +99,30 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if query.data in hack_data:
         hack = hack_data[query.data]
 
-        # Send the video using file ID
-        await query.message.reply_video(
-            video=hack["video"],
-            caption=hack["caption"],
-            parse_mode="MarkdownV2"
-        )
-
-        # Send the audio with its caption
-        await query.message.reply_audio(
-            audio=hack["audio"],
-            caption=hack["audio_caption"],
-            parse_mode="MarkdownV2"
-        )
-
-        # Send the APK file link
-        await query.message.reply_document(
-            document=hack["apk"],
-            caption=hack["apk_caption"],
-            parse_mode="MarkdownV2"
-        )
+        # Send the video
+        await query.message.reply_video(video=hack["video"], caption=hack["caption"], parse_mode="MarkdownV2")
+        # Send the audio
+        await query.message.reply_audio(audio=hack["audio"], caption=hack["audio_caption"], parse_mode="MarkdownV2")
+        # Send the APK file
+        await query.message.reply_document(document=hack["apk"], caption=hack["apk_caption"], parse_mode="MarkdownV2")
 
 # Flask endpoints
 @app.route('/')
 def home():
     return "Bot is running!"
 
-@app.route('/test')
-def test():
-    return "Test endpoint active!"
-
 # Run Telegram bot
 def run_telegram_bot():
-    application = ApplicationBuilder().token("7446057407:AAFp5hofMUG_F_Z-VhZjYnzX8MeJ_xvy43M").build()
+    application = ApplicationBuilder().token(os.getenv("7446057407:AAFp5hofMUG_F_Z-VhZjYnzX8MeJ_xvy43M")).build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button_handler))
     application.run_polling()
 
 # Run Flask server
 def run_flask():
-    app.run(host='0.0.0.0', port=10000)
+    app.run(host='0.0.0.0', port=int(os.getenv("PORT", 10000)))
 
-# Main entry point
+# Main function
 if __name__ == "__main__":
     threading.Thread(target=run_flask).start()
     run_telegram_bot()
