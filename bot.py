@@ -1,7 +1,6 @@
 # Required imports
 import re
 import threading
-import os
 from flask import Flask
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
@@ -130,16 +129,16 @@ def home():
 def test():
     return "Test endpoint active!"
 
-# Run Telegram bot in a separate thread
+# Run Telegram bot
 def run_telegram_bot():
-    application = ApplicationBuilder().token(os.getenv('7446057407:AAFp5hofMUG_F_Z-VhZjYnzX8MeJ_xvy43M')).build()
+    application = ApplicationBuilder().token("7446057407:AAFp5hofMUG_F_Z-VhZjYnzX8MeJ_xvy43M").build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button_handler))
     application.run_polling()
 
 # Run Flask server
 def run_flask():
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 10000)))
+    app.run(host='0.0.0.0', port=10000)
 
 # Main entry point
 if __name__ == "__main__":
