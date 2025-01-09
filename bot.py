@@ -19,9 +19,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         chat_id=chat_id,
         photo="https://drive.google.com/uc?id=19p7j4tb9vIz_Ff6vAbcA_cMgnQLasC0O",
         caption="Yeh mera main channel hai, jaha mein apna kaam dikhata hu. Mere channel ko subscribe kree, aur latest khabre prapt kree.🔥",
-        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✅SUBSCRIBE✅", url="https://t.me/+5icz2F7eIn0zZDI1")]])
-    )
-
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✅SUBSCRIBE✅", url="https://t.me/+5icz2F7eIn0zZDI1")]]))
+    
     # Hack selection buttons
     await context.bot.send_photo(
         chat_id=chat_id,
@@ -40,30 +39,46 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()  # Acknowledge button press
 
-    # Video and audio responses based on button clicked
+    # Video file IDs, audio file links, and captions for each hack
     hack_data = {
         "sikkim_hack": {
             "video": "BAACAgUAAxkBAAMJZ4AuXlxgQqMD85aOAyggbKVz6p0AAicVAAJSL5hX1q9yAbuNEt42BA",
-            "caption": "Here is your SIKKIM VIP HACK video! 🎮"
+            "caption": "Here is your SIKKIM VIP HACK video! 🎮",
+            "audio": "https://sstournaments.com/piyush/sikkimaudio.mp3",
+            "audio_caption": "<b>Listen to activate hack 🌟 Register: http://www.sikkim7.com/#/register?invitationCode=73728400111</b>"
         },
         "goa_hack": {
             "video": "BAACAgUAAxkBAAMDZ4AtCw6kcCEMNnw_iPxkF3cDhkkAAioVAAJSL5hXDOa_YxKmrOE2BA",
-            "caption": "Here is your GOA STAR HACK video! 🎮"
+            "caption": "Here is your GOA STAR HACK video! 🎮",
+            "audio": "https://sstournaments.com/piyush/goahack.mp3",
+            "audio_caption": "Listen to activate hack 🌟 Register: https://www.bing009.com/#/register?invitationCode=416623809168"
         },
         "diuwin_hack": {
             "video": "BAACAgUAAxkBAAMVZ4AvAAFKugxu0xXzJWKyAgHRaK_YAAIlFQACUi-YV23guxciLQ0dNgQ",
-            "caption": "Here is your DIUWIN GRAND HACK video! 🎮"
+            "caption": "Here is your DIUWIN GRAND HACK video! 🎮",
+            "audio": "https://sstournaments.com/piyush/diuwinhack.mp3",
+            "audio_caption": "Listen to activate hack 🌟 Register: https://diuwinapp.pro/#/register?invitationCode=42677100202"
         },
         "okwin_hack": {
             "video": "BAACAgUAAxkBAAMTZ4Au9_kqCAT_0VoxjqwKVqtFcOAAAiwVAAJSL5hX62NsRnhGekY2BA",
-            "caption": "Here is your OKWIN SURE HACK video! 🎮"
+            "caption": "Here is your OKWIN SURE HACK video! 🎮",
+            "audio": "https://sstournaments.com/piyush/okwinhack.mp3",
+            "audio_caption": "Listen to activate hack 🌟 Register: https://www.okowin.com/#/register?invitationCode=282452739393"
         }
     }
 
     if query.data in hack_data:
         hack = hack_data[query.data]
-        await query.message.reply_video(video=hack["video"], caption=hack["caption"])
-        await query.message.reply_audio(audio=hack["audio"], caption=hack["audio_caption"])
+        # Send the video using file ID
+        await query.message.reply_video(
+            video=hack["video"],
+            caption=hack["caption"]
+        )
+        # Send the audio with its caption
+        await query.message.reply_audio(
+            audio=hack["audio"],
+            caption=hack["audio_caption"]
+        )
 
 # Flask endpoints
 @app.route('/')
