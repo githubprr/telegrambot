@@ -44,26 +44,34 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "sikkim_hack": {
             "video": "BAACAgUAAxkBAAMJZ4AuXlxgQqMD85aOAyggbKVz6p0AAicVAAJSL5hX1q9yAbuNEt42BA",
             "caption": "Here is your SIKKIM VIP HACK video! 🎮",
-            "audio": "https://sstournaments.com/piyush/sikkimaudio.mp3",
-            "audio_caption": "<b>Listen to activate hack 🌟 Register: http://www.sikkim7.com/#/register?invitationCode=73728400111</b>"
+            "audio": "CQACAgUAAxkBAAMsZ4AzrUftaLfSRysln_syY6B-L84AApoSAAKYkQABVCyhw83picDwNgQ",
+            "audio_caption": "Listen to activate hack 🌟 Register: http://www.sikkim7.com/#/register?invitationCode=73728400111",
+            "apk": "BQACAgUAAxkBAAM2Z4A2HW9VF_DBBG22cjtDAWrlOTIAAqISAAKYkQABVF0j9ulVjh1dNgQ",
+            "apk_caption": "Install this APK to complete the setup for SIKKIM VIP HACK 📱"
         },
         "goa_hack": {
             "video": "BAACAgUAAxkBAAMDZ4AtCw6kcCEMNnw_iPxkF3cDhkkAAioVAAJSL5hXDOa_YxKmrOE2BA",
             "caption": "Here is your GOA STAR HACK video! 🎮",
-            "audio": "https://sstournaments.com/piyush/goahack.mp3",
-            "audio_caption": "Listen to activate hack 🌟 Register: https://www.bing009.com/#/register?invitationCode=416623809168"
+            "audio": "CQACAgUAAxkBAAMuZ4Azwym6eVX65Y2nQNOtpfUl6lAAApsSAAKYkQABVC-gm-lRljJnNgQ",
+            "audio_caption": "Listen to activate hack 🌟 Register: https://www.bing009.com/#/register?invitationCode=416623809168",
+            "apk": "BQACAgUAAxkBAAM4Z4A2UYJm7pcN5URzbJB8j2R2C5sAAqMSAAKYkQABVPvubyoExccFNgQ",
+            "apk_caption": "Install this APK to complete the setup for GOA STAR HACK 📱"
         },
         "diuwin_hack": {
             "video": "BAACAgUAAxkBAAMVZ4AvAAFKugxu0xXzJWKyAgHRaK_YAAIlFQACUi-YV23guxciLQ0dNgQ",
             "caption": "Here is your DIUWIN GRAND HACK video! 🎮",
-            "audio": "https://sstournaments.com/piyush/diuwinhack.mp3",
-            "audio_caption": "Listen to activate hack 🌟 Register: https://diuwinapp.pro/#/register?invitationCode=42677100202"
+            "audio": "CQACAgUAAxkBAAMwZ4Az3vJt739YDY85Y6mtI23AqJAAApwSAAKYkQABVNyQOcy2AYQ9NgQ",
+            "audio_caption": "Listen to activate hack 🌟 Register: https://diuwinapp.pro/#/register?invitationCode=42677100202",
+            "apk": "BQACAgUAAxkBAAM6Z4A2ZryX4FEkU2Wb1VTN3Mj5VnoAAqQSAAKYkQABVI92RancblNhNgQ",
+            "apk_caption": "Install this APK to complete the setup for DIUWIN GRAND HACK 📱"
         },
         "okwin_hack": {
             "video": "BAACAgUAAxkBAAMTZ4Au9_kqCAT_0VoxjqwKVqtFcOAAAiwVAAJSL5hX62NsRnhGekY2BA",
             "caption": "Here is your OKWIN SURE HACK video! 🎮",
-            "audio": "https://sstournaments.com/piyush/okwinhack.mp3",
-            "audio_caption": "Listen to activate hack 🌟 Register: https://www.okowin.com/#/register?invitationCode=282452739393"
+            "audio": "CQACAgUAAxkBAAMyZ4Az8Nr47MZY_z5z-0TE4LI2sPYAAp0SAAKYkQABVK7olxLQR2X2NgQ",
+            "audio_caption": "Listen to activate hack 🌟 Register: https://www.okowin.com/#/register?invitationCode=282452739393",
+            "apk": "BQACAgUAAxkBAAM8Z4A2hULLaaOX5C0zas3MvhENL8YAAqUSAAKYkQABVK9pjN86d72INgQ",
+            "apk_caption": "Install this APK to complete the setup for OKWIN SURE HACK 📱"
         }
     }
 
@@ -80,6 +88,12 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             caption=hack["audio_caption"]
         )
 
+        # Send the APK file link
+        await query.message.reply_document(
+            document=hack["apk"],
+            caption=hack["apk_caption"]
+        )
+
 # Flask endpoints
 @app.route('/')
 def home():
@@ -91,7 +105,7 @@ def test():
 
 # Run Telegram bot
 def run_telegram_bot():
-    application = ApplicationBuilder().token("7446057407:AAFHB_sOytsxgRQA54ySLxGY9yIyraWvIlI").build()
+    application = ApplicationBuilder().token("7739595304:AAFQrUaHDyVK1ALqW_TYqRILDdMaNfmGWEw").build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button_handler))
     application.run_polling()
