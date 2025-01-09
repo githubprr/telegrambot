@@ -43,25 +43,25 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Video and audio responses based on button clicked
     hack_data = {
         "sikkim_hack": {
-            "video": "https://file-to-link-nx-ccf8d5eda5c0.herokuapp.com/watch/67801db902ec246f4678cc03",
+            "video": "https://file-to-link-nx-ccf8d5eda5c0.herokuapp.com/dl/678027fd02ec246f4678ccb0",
             "caption": "Here is your SIKKIM VIP HACK video! 🎮",
             "audio": "https://sstournaments.com/piyush/sikkimaudio.mp3",
             "audio_caption": "<b>Listen to activate hack 🌟 Register: http://www.sikkim7.com/#/register?invitationCode=73728400111</b>"
         },
         "goa_hack": {
-            "video": "https://file-to-link-nx-ccf8d5eda5c0.herokuapp.com/watch/67801bd202ec246f4678cbc4",
+            "video": "https://file-to-link-nx-ccf8d5eda5c0.herokuapp.com/dl/678027fd02ec246f4678ccb0",
             "caption": "Here is your GOA STAR HACK video! 🎮",
             "audio": "https://sstournaments.com/piyush/goahack.mp3",
             "audio_caption": "Listen to activate hack 🌟 Register: https://www.bing009.com/#/register?invitationCode=416623809168"
         },
         "diuwin_hack": {
-            "video": "https://file-to-link-nx-ccf8d5eda5c0.herokuapp.com/watch/678025f002ec246f4678cc91",
+            "video": "https://file-to-link-nx-ccf8d5eda5c0.herokuapp.com/dl/678027fd02ec246f4678ccb0",
             "caption": "Here is your DIUWIN GRAND HACK video! 🎮",
             "audio": "https://sstournaments.com/piyush/diuwinhack.mp3",
             "audio_caption": "Listen to activate hack 🌟 Register: https://diuwinapp.pro/#/register?invitationCode=42677100202"
         },
         "okwin_hack": {
-            "video": "https://file-to-link-nx-ccf8d5eda5c0.herokuapp.com/watch/6780260402ec246f4678cc92",
+            "video": "https://file-to-link-nx-ccf8d5eda5c0.herokuapp.com/dl/678027fd02ec246f4678ccb0",
             "caption": "Here is your OKWIN SURE HACK video! 🎮",
             "audio": "https://sstournaments.com/piyush/okwinhack.mp3",
             "audio_caption": "Listen to activate hack 🌟 Register: https://www.okowin.com/#/register?invitationCode=282452739393"
