@@ -1,11 +1,15 @@
 import re
-import threading
-from flask import Flask
+import random
+from flask import Flask, request
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
+from telegram.ext import Application, CommandHandler, CallbackQueryHandler
 
 # Initialize Flask web server
 app = Flask(__name__)
+
+# Bot token and webhook URL
+BOT_TOKEN = "7446057407:AAFp5hofMUG_F_Z-VhZjYnzX8MeJ_xvy43M"  # Replace with your bot's token
+WEBHOOK_URL = "https://telegrambot-v26n.onrender.com/webhook"  # Replace <your_domain> with your actual domain
 
 # Helper function to make text bold
 def make_bold(text):
@@ -13,7 +17,7 @@ def make_bold(text):
     return f"*{escaped_text}*"
 
 # Function to handle the /start command
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def start(update: Update, context):
     chat_id = update.effective_chat.id
 
     # Welcome message with bold text
@@ -36,7 +40,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ),
         parse_mode="MarkdownV2"
     )
-    
+
     # Hack selection buttons
     await context.bot.send_photo(
         chat_id=chat_id,
@@ -53,13 +57,13 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ]),
         parse_mode="MarkdownV2"
     )
-    
-# Function to handle button interactions
-async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+# Function to handle button interactions and send relevant content (video, audio, apk)
+async def button_handler(update: Update, context):
     query = update.callback_query
     await query.answer()  # Acknowledge button press
 
-    # Video file IDs, audio file links, and captions for each hack
+    # Data for each hack (video, audio, APK, etc.)
     hack_data = {
         "sikkim_hack": {
             "video": "BAACAgUAAxkBAAIFQ2eAOe5opaSq7JJdWVqrLC-X0LEOAAIsFQACUi-YV2dFPleZscusNgQ",
@@ -119,43 +123,60 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="MarkdownV2"
         )
 
-        # Send additional text and inline buttons for other hacks
-        await query.message.reply_text(
-            text=make_bold("🚀 Hamare dusre hacks try karo! 💥"),
-            parse_mode="MarkdownV2"
-        )
+        # Add a small gamification feature
+        game_outcome = random.choice(["win", "lose"])
 
-        # Inline buttons for other hacks
-        inline_buttons = [
-            [InlineKeyboardButton("✅SIKKIM VIP HACK✅", callback_data="sikkim_hack")],
-            [InlineKeyboardButton("✅GOA STAR HACK✅", callback_data="goa_hack")],
-            [InlineKeyboardButton("✅DIUWIN GRAND HACK✅", callback_data="diuwin_hack")],
-            [InlineKeyboardButton("✅OKWIN SURE HACK✅", callback_data="okwin_hack")]
-        ]
+        if game_outcome == "win":
+            await query.message.reply_text(
+                text=make_bold("🎉 Congratulations! You've won a bonus! 🎁"),
+                parse_mode="MarkdownV2"
+            )
+            await query.message.reply_text(
+                text=make_bold("🚀 Try your luck again and use another hack to get more bonuses! 👇"),
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton("✅SIKKIM VIP HACK✅", callback_data="sikkim_hack")],
+                    [InlineKeyboardButton("✅GOA STAR HACK✅", callback_data="goa_hack")],
+                    [InlineKeyboardButton("✅DIUWIN GRAND HACK✅", callback_data="diuwin_hack")],
+                    [InlineKeyboardButton("✅OKWIN SURE HACK✅", callback_data="okwin_hack")]
+                ]),
+                parse_mode="MarkdownV2"
+            )
+        else:
+            await query.message.reply_text(
+                text=make_bold("😞 Sorry! You lost this time. Better luck next time! 🍀"),
+                parse_mode="MarkdownV2"
+            )
+            await query.message.reply_text(
+                text=make_bold("🚀 Try your luck again and use another hack to get more bonuses! 👇"),
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton("✅SIKKIM VIP HACK✅", callback_data="sikkim_hack")],
+                    [InlineKeyboardButton("✅GOA STAR HACK✅", callback_data="goa_hack")],
+                    [InlineKeyboardButton("✅DIUWIN GRAND HACK✅", callback_data="diuwin_hack")],
+                    [InlineKeyboardButton("✅OKWIN SURE HACK✅", callback_data="okwin_hack")]
+                ]),
+                parse_mode="MarkdownV2"
+            )
 
-        await query.message.reply_text(
-            text=make_bold("Try another hack! 👇"),
-            reply_markup=InlineKeyboardMarkup(inline_buttons),
-            parse_mode="MarkdownV2"
-        )
-        
-# Flask endpoints
-@app.route('/')
-def home():
-    return "Bot is running!"
+# Flask webhook route
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    json_str = request.get_data().decode('UTF-8')
+    update = Update.de_json(json_str, application.bot)
+    application.process_update(update)
+    return 'ok'
 
-@app.route('/test')
-def test():
-    return "Test endpoint active!"
+# Set webhook for the bot
+def set_webhook():
+    application.bot.set_webhook(url=WEBHOOK_URL)
 
-# Run Telegram bot
+# Run Telegram bot with webhook
 def run_telegram_bot():
-    # Hardcoded bot token
-    BOT_TOKEN = "7446057407:AAFp5hofMUG_F_Z-VhZjYnzX8MeJ_xvy43M"
-    application = ApplicationBuilder().token(BOT_TOKEN).build()
+    global application
+    application = Application.builder().token(BOT_TOKEN).build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button_handler))
-    application.run_polling()
+
+    set_webhook()
 
 # Run Flask server
 def run_flask():
@@ -165,5 +186,6 @@ def run_flask():
 
 # Main entry point
 if __name__ == "__main__":
+    import threading
     threading.Thread(target=run_flask).start()
     run_telegram_bot()
