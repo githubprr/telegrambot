@@ -13,12 +13,6 @@ def make_bold(text):
     escaped_text = re.sub(r"([_*()~`>#+\-=|{}.!])", r"\\\1", text)  # Escape reserved characters
     return f"*{escaped_text}*"
 
-# Function to create bottom menu with a single "Start" button
-def get_bottom_menu():
-    return InlineKeyboardMarkup([
-        [InlineKeyboardButton("🛠 Start Hack", callback_data="start_hack")]  # Only one button
-    ])
-
 # Function to handle the /start command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
@@ -61,20 +55,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         parse_mode="MarkdownV2"
     )
 
-    # Send the bottom menu with only one "Start Hack" button
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="Choose an option from the menu below:",
-        reply_markup=get_bottom_menu(),
-        parse_mode="MarkdownV2"
-    )
-
 # Function to handle button interactions
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()  # Acknowledge button press
 
-    # Video, audio, and APK data for each hack
+    # Video file IDs, audio file links, and captions for each hack
     hack_data = {
         "sikkim_hack": {
             "video": "BAACAgUAAxkBAAIFQ2eAOe5opaSq7JJdWVqrLC-X0LEOAAIsFQACUi-YV2dFPleZscusNgQ",
@@ -110,7 +96,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         }
     }
 
-    # Respond based on the hack button clicked
     if query.data in hack_data:
         hack = hack_data[query.data]
 
@@ -135,13 +120,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="MarkdownV2"
         )
 
-        # Resend the bottom menu after any button press
-        await query.message.reply_text(
-            "Choose an option from the menu below:",
-            reply_markup=get_bottom_menu(),
-            parse_mode="MarkdownV2"
-        )
-
 # Flask endpoints
 @app.route('/')
 def home():
@@ -153,6 +131,7 @@ def test():
 
 # Run Telegram bot
 def run_telegram_bot():
+    # Hardcoded bot token
     BOT_TOKEN = "7446057407:AAFp5hofMUG_F_Z-VhZjYnzX8MeJ_xvy43M"
     application = ApplicationBuilder().token(BOT_TOKEN).build()
     application.add_handler(CommandHandler("start", start))
