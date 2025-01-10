@@ -13,10 +13,13 @@ def make_bold(text):
     escaped_text = re.sub(r"([_*()~`>#+\-=|{}.!])", r"\\\1", text)  # Escape reserved characters
     return f"*{escaped_text}*"
 
-# Function to create bottom menu with a single "Start" button
-def get_bottom_menu():
+# Function to create hack buttons menu
+def get_hack_buttons_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton("🛠 Start Hack", callback_data="start_hack")]  # Only one button
+        [InlineKeyboardButton("✅SIKKIM VIP HACK✅", callback_data="sikkim_hack")],
+        [InlineKeyboardButton("✅GOA STAR HACK✅", callback_data="goa_hack")],
+        [InlineKeyboardButton("✅DIUWIN GRAND HACK✅", callback_data="diuwin_hack")],
+        [InlineKeyboardButton("✅OKWIN SURE HACK✅", callback_data="okwin_hack")]
     ])
 
 # Function to handle the /start command
@@ -30,21 +33,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         parse_mode="MarkdownV2"
     )
 
-    # First image message
-    await context.bot.send_photo(
-        chat_id=chat_id,
-        photo="https://drive.google.com/uc?id=19p7j4tb9vIz_Ff6vAbcA_cMgnQLasC0O",
-        caption=make_bold(
-            "Yeh mera main channel hai, jaha mein apna kaam dikhata hu. "
-            "Mere channel ko subscribe kree, aur latest khabre prapt kree.🔥"
-        ),
-        reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("✅SUBSCRIBE✅", url="https://t.me/+5icz2F7eIn0zZDI1")]]
-        ),
-        parse_mode="MarkdownV2"
-    )
-    
-    # Hack selection buttons
+    # Send hack buttons menu
     await context.bot.send_photo(
         chat_id=chat_id,
         photo="https://sstournaments.com/piyush/image2.jpg",
@@ -52,20 +41,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "🛍 Apna Choice ke according Color Prediciton Master Hack choose karo.💸 "
             "Tumhare paas mauka hai profit wale VIP Hacks Ko Free Mai Lene Ka."
         ),
-        reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton("✅SIKKIM VIP HACK✅", callback_data="sikkim_hack")],
-            [InlineKeyboardButton("✅GOA STAR HACK✅", callback_data="goa_hack")],
-            [InlineKeyboardButton("✅DIUWIN GRAND HACK✅", callback_data="diuwin_hack")],
-            [InlineKeyboardButton("✅OKWIN SURE HACK✅", callback_data="okwin_hack")]
-        ]),
-        parse_mode="MarkdownV2"
-    )
-
-    # Send the bottom menu with only one "Start Hack" button
-    await context.bot.send_message(
-        chat_id=chat_id,
-        text="Choose an option from the menu below:",
-        reply_markup=get_bottom_menu(),
+        reply_markup=get_hack_buttons_menu(),
         parse_mode="MarkdownV2"
     )
 
@@ -135,12 +111,12 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="MarkdownV2"
         )
 
-        # Resend the bottom menu after any button press
-        await query.message.reply_text(
-            "Choose an option from the menu below:",
-            reply_markup=get_bottom_menu(),
-            parse_mode="MarkdownV2"
-        )
+    # Always resend the bottom menu after any action
+    await query.message.reply_text(
+        "Choose an option from the menu below:",
+        reply_markup=get_hack_buttons_menu(),
+        parse_mode="MarkdownV2"
+    )
 
 # Flask endpoints
 @app.route('/')
