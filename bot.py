@@ -121,8 +121,8 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         # Send additional text and inline buttons for other hacks
         await query.message.reply_text(
-    text=make_bold("🚀 Hamare dusre hacks try karo! 💥"),
-    parse_mode="MarkdownV2"
+            text=make_bold("🚀 Hamare dusre hacks try karo! 💥"),
+            parse_mode="MarkdownV2"
         )
 
         # Inline buttons for other hacks
