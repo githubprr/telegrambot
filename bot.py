@@ -119,18 +119,16 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="MarkdownV2"
         )
 
-        # Send additional text and inline buttons for other hacks
+        # Send additional text and inline buttons for other hacks, excluding the chosen one
         await query.message.reply_text(
-    text=make_bold("🚀 Hamare dusre hacks try karo! 💥"),
-    parse_mode="MarkdownV2"
+            text=make_bold("🚀 Hamare dusre hacks try karo! 💥"),
+            parse_mode="MarkdownV2"
         )
 
-        # Inline buttons for other hacks
+        # Inline buttons for remaining hacks
+        remaining_hacks = [key for key in hack_data if key != query.data]
         inline_buttons = [
-            [InlineKeyboardButton("✅SIKKIM VIP HACK✅", callback_data="sikkim_hack")],
-            [InlineKeyboardButton("✅GOA STAR HACK✅", callback_data="goa_hack")],
-            [InlineKeyboardButton("✅DIUWIN GRAND HACK✅", callback_data="diuwin_hack")],
-            [InlineKeyboardButton("✅OKWIN SURE HACK✅", callback_data="okwin_hack")]
+            [InlineKeyboardButton(f"✅{hack_data[hack]['caption']}✅", callback_data=hack)] for hack in remaining_hacks
         ]
 
         await query.message.reply_text(
