@@ -19,7 +19,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Welcome message with bold text
     await context.bot.send_message(
         chat_id=chat_id,
-        text=make_bold("🎉 Welcome to the 🤑 *Casino Hack Bot* 🎲"),
+        text=make_bold("🎉 Welcome to the 🤑 Casino Hack Bot 🎲"),
         parse_mode="MarkdownV2"
     )
 
@@ -42,8 +42,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         chat_id=chat_id,
         photo="https://sstournaments.com/piyush/image2.jpg",
         caption=make_bold(
-            "💥 *Apne Choice ke according Color Prediction Master Hack choose karo* 💸\n\n"
-            "💎 Tumhare paas mauka hai *profit wale VIP Hacks Ko Free Mai Lene Ka* 💎"
+            "💥 Apne Choice ke according Color Prediction Master Hack choose karo 💸\n\n"
+            "💎 Tumhare paas mauka hai Profit wale VIP Hacks Ko Free Mai Lene Ka 💎"
         ),
         reply_markup=InlineKeyboardMarkup([
             [InlineKeyboardButton("✅SIKKIM VIP HACK✅", callback_data="sikkim_hack")],
@@ -53,7 +53,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ]),
         parse_mode="MarkdownV2"
     )
-
+    
 # Function to handle button interactions
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
@@ -95,6 +95,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         }
     }
 
+    # Check if the selected hack is in the hack data
     if query.data in hack_data:
         hack = hack_data[query.data]
 
@@ -132,7 +133,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             ]),
             parse_mode="MarkdownV2"
         )
-
+        
 # Flask endpoints
 @app.route('/')
 def home():
