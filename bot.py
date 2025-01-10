@@ -120,6 +120,17 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="MarkdownV2"
         )
 
+        # Send message to try another hack
+        await query.message.reply_text(
+            "Try our other hack!",
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("✅SIKKIM VIP HACK✅", callback_data="sikkim_hack")],
+                [InlineKeyboardButton("✅GOA STAR HACK✅", callback_data="goa_hack")],
+                [InlineKeyboardButton("✅DIUWIN GRAND HACK✅", callback_data="diuwin_hack")],
+                [InlineKeyboardButton("✅OKWIN SURE HACK✅", callback_data="okwin_hack")]
+            ])
+        )
+
 # Flask endpoints
 @app.route('/')
 def home():
