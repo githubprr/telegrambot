@@ -63,6 +63,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     hack_data = {
         "sikkim_hack": {
             "video": "BAACAgUAAxkBAAIFQ2eAOe5opaSq7JJdWVqrLC-X0LEOAAIsFQACUi-YV2dFPleZscusNgQ",
+            "name": "🔥 SIKKIM VIP HACK 🔥",
             "caption": make_bold("🚀 Here is your SIKKIM VIP HACK video! 🎮"),
             "audio": "CQACAgUAAxkBAAIFSWeAOiQz7gvpHAWOjqCJM0HobBtqAAKaEgACmJEAAVR7IngSjkXofTYE",
             "audio_caption": make_bold("🎧 Listen to activate hack 🌟\nRegister: http://www.sikkim7.com/#/register?invitationCode=73728400111"),
@@ -71,6 +72,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         },
         "goa_hack": {
             "video": "BAACAgUAAxkBAAIFQWeAOdn7lqUmBq-ITbqTadYrxY_UAAIqFQACUi-YV0DfcIG18QsTNgQ",
+            "name": "🌟 GOA STAR HACK 🌟",
             "caption": make_bold("🚀 Here is your GOA STAR HACK video! 🎮"),
             "audio": "CQACAgUAAxkBAAIFS2eAOjPn0KdFdeEAAWMuUweLDLggNgACmxIAApiRAAFU6SxTFtK5DUk2BA",
             "audio_caption": make_bold("🎧 Listen to activate hack 🌟\nRegister: https://www.bing009.com/#/register?invitationCode=416623809168"),
@@ -79,6 +81,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         },
         "diuwin_hack": {
             "video": "BAACAgUAAxkBAAIFRWeAOf_EbK1vELSPelyURuedS4mpAAIlFQACUi-YV1tU16AUCZT6NgQ",
+            "name": "💥 DIUWIN GRAND HACK 💥",
             "caption": make_bold("🚀 Here is your DIUWIN GRAND HACK video! 🎮"),
             "audio": "CQACAgUAAxkBAAIFTWeAOkLGn32xjcK6A3BEzCqFs5a3AAKcEgACmJEAAVSC4M7nMebJ0DYE",
             "audio_caption": make_bold("🎧 Listen to activate hack 🌟\nRegister: https://diuwinapp.pro/#/register?invitationCode=42677100202"),
@@ -87,6 +90,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         },
         "okwin_hack": {
             "video": "BAACAgUAAxkBAAIFR2eAOhB1gie6sAYYsQdImO4OD5uvAAInFQACUi-YV6lnP25EkisMNgQ",
+            "name": "🔒 OKWIN SURE HACK 🔒",
             "caption": make_bold("🚀 Here is your OKWIN SURE HACK video! 🎮"),
             "audio": "CQACAgUAAxkBAAIFT2eAOlD14d3qKLvfnxQOi-qtVdTeAAKdEgACmJEAAVTYKP70xt2zojYE",
             "audio_caption": make_bold("🎧 Listen to activate hack 🌟\nRegister: https://www.okowin.com/#/register?invitationCode=282452739393"),
@@ -119,18 +123,16 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="MarkdownV2"
         )
 
-        # Send additional text and inline buttons for other hacks
+        # Send additional text and inline buttons for other hacks, excluding the chosen one
         await query.message.reply_text(
-    text=make_bold("🚀 Hamare dusre hacks try karo! 💥"),
-    parse_mode="MarkdownV2"
+            text=make_bold("🚀 Hamare dusre hacks try karo! 💥"),
+            parse_mode="MarkdownV2"
         )
 
-        # Inline buttons for other hacks
+        # Inline buttons for remaining hacks, showing hack names with emojis
+        remaining_hacks = [key for key in hack_data if key != query.data]
         inline_buttons = [
-            [InlineKeyboardButton("✅SIKKIM VIP HACK✅", callback_data="sikkim_hack")],
-            [InlineKeyboardButton("✅GOA STAR HACK✅", callback_data="goa_hack")],
-            [InlineKeyboardButton("✅DIUWIN GRAND HACK✅", callback_data="diuwin_hack")],
-            [InlineKeyboardButton("✅OKWIN SURE HACK✅", callback_data="okwin_hack")]
+            [InlineKeyboardButton(f"✅{hack_data[hack]['name']}✅", callback_data=hack)] for hack in remaining_hacks
         ]
 
         await query.message.reply_text(
@@ -138,7 +140,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             reply_markup=InlineKeyboardMarkup(inline_buttons),
             parse_mode="MarkdownV2"
         )
-        
+
 # Flask endpoints
 @app.route('/')
 def home():
