@@ -1,8 +1,5 @@
 import re
 import threading
-from datetime import datetime, timedelta
-from apscheduler.schedulers.background import BackgroundScheduler
-from apscheduler.triggers.simple import SimpleTrigger
 from flask import Flask
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
@@ -14,13 +11,6 @@ app = Flask(__name__)
 def make_bold(text):
     escaped_text = re.sub(r"([_*()~`>#+\-=|{}.!])", r"\\\1", text)  # Escape reserved characters
     return f"*{escaped_text}*"
-
-# Setup the scheduler
-scheduler = BackgroundScheduler()
-
-# Function to send scheduled message
-def send_scheduled_message(chat_id, message, context):
-    context.bot.send_message(chat_id=chat_id, text=message, parse_mode="MarkdownV2")
 
 # Function to handle the /start command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -63,54 +53,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ]),
         parse_mode="MarkdownV2"
     )
-
-# Function to handle scheduling
-async def schedule(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    chat_id = update.effective_chat.id
-
-    # Check if a time was provided
-    if len(context.args) < 1:
-        await context.bot.send_message(
-            chat_id=chat_id,
-            text="❌ Please specify the time in the format: /schedule <HH:MM> <Message>"
-        )
-        return
-
-    # Get time and message
-    time_str = context.args[0]  # e.g., 15:30
-    message = " ".join(context.args[1:])  # The rest is the message
-
-    # Parse the time
-    try:
-        scheduled_time = datetime.strptime(time_str, "%H:%M")
-        scheduled_time = scheduled_time.replace(
-            year=datetime.now().year,
-            month=datetime.now().month,
-            day=datetime.now().day
-        )
-
-        # If time has already passed today, schedule for tomorrow
-        if scheduled_time < datetime.now():
-            scheduled_time += timedelta(days=1)
-
-        # Schedule the message
-        scheduler.add_job(
-            send_scheduled_message,
-            SimpleTrigger(scheduled_time),
-            args=[chat_id, message, context]
-        )
-
-        # Notify user
-        await context.bot.send_message(
-            chat_id=chat_id,
-            text=make_bold(f"✅ Your message has been scheduled for {scheduled_time.strftime('%H:%M')}!")
-        )
-
-    except ValueError:
-        await context.bot.send_message(
-            chat_id=chat_id,
-            text="❌ Invalid time format. Please use HH:MM format (e.g., 15:30)."
-        )
 
 # Function to handle button interactions
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -206,7 +148,6 @@ def run_telegram_bot():
     BOT_TOKEN = "7446057407:AAFp5hofMUG_F_Z-VhZjYnzX8MeJ_xvy43M"
     application = ApplicationBuilder().token(BOT_TOKEN).build()
     application.add_handler(CommandHandler("start", start))
-    application.add_handler(CommandHandler("schedule", schedule, pass_args=True))  # Add schedule handler
     application.add_handler(CallbackQueryHandler(button_handler))
     application.run_polling()
 
@@ -219,5 +160,4 @@ def run_flask():
 # Main entry point
 if __name__ == "__main__":
     threading.Thread(target=run_flask).start()
-    scheduler.start()  # Start the scheduler
     run_telegram_bot()
