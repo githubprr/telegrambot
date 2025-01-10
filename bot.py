@@ -1,6 +1,6 @@
 import re
 import random
-import asyncio
+import os
 from flask import Flask, request
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler
@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 # Bot token and webhook URL
 BOT_TOKEN = "7446057407:AAFp5hofMUG_F_Z-VhZjYnzX8MeJ_xvy43M"  # Replace with your bot's token
-WEBHOOK_URL = "https://telegrambot-v26n.onrender.com/webhook"  # Replace with your actual domain
+WEBHOOK_URL = "https://telegrambot-v26n.onrender.com/webhook"  # Replace <your_domain> with your actual domain
 
 # Helper function to make text bold
 def make_bold(text):
@@ -144,11 +144,13 @@ async def button_handler(update: Update, context):
             )
         else:
             await query.message.reply_text(
-                text=make_bold("😞 Sorry! You lost this time. Better luck next time! 🍀"),
+                text=make_bold("😞 Better luck next time! Keep trying! 🍀"),
                 parse_mode="MarkdownV2"
             )
+
+            # Provide options to try another hack
             await query.message.reply_text(
-                text=make_bold("🚀 Try your luck again and use another hack to get more bonuses! 👇"),
+                text=make_bold("🚀 Try your luck with another hack! 👇"),
                 reply_markup=InlineKeyboardMarkup([
                     [InlineKeyboardButton("✅SIKKIM VIP HACK✅", callback_data="sikkim_hack")],
                     [InlineKeyboardButton("✅GOA STAR HACK✅", callback_data="goa_hack")],
@@ -158,22 +160,34 @@ async def button_handler(update: Update, context):
                 parse_mode="MarkdownV2"
             )
 
-# Setup Flask endpoint to handle webhook
-@app.route('/webhook', methods=['POST'])
-async def webhook():
-    json_str = request.get_data().decode("UTF-8")
-    update = Update.de_json(json_str, context.bot)
-    await button_handler(update, context)
-    return 'OK'
-
-# Set webhook
-async def set_webhook():
-    await application.bot.set_webhook(WEBHOOK_URL)
-
-# Run the bot
-if __name__ == '__main__':
+# Initialize the Telegram bot application
+async def main():
     application = Application.builder().token(BOT_TOKEN).build()
+
+    # Set up command handlers
     application.add_handler(CommandHandler("start", start))
+
+    # Set up callback handlers
     application.add_handler(CallbackQueryHandler(button_handler))
-    asyncio.run(set_webhook())
-    app.run(port=8443)
+
+    # Start polling for updates
+    await application.run_polling()
+
+# Flask route to handle webhook requests from Telegram
+@app.route("/webhook", methods=["POST"])
+def webhook():
+    json_str = request.get_data(as_text=True)
+    update = Update.de_json(json.loads(json_str), application.bot)
+    application.update_queue.put(update)
+    return "ok", 200
+
+# Set the webhook URL with Telegram API
+@app.route("/set_webhook", methods=["GET"])
+def set_webhook():
+    webhook_url = WEBHOOK_URL
+    application.bot.setWebhook(url=webhook_url)
+    return f"Webhook set: {webhook_url}", 200
+
+if __name__ == "__main__":
+    # Run the Flask app in the correct port for deployment
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8443)))
