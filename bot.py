@@ -1,5 +1,6 @@
 import re
 import random
+import asyncio
 from flask import Flask, request
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler
@@ -9,7 +10,7 @@ app = Flask(__name__)
 
 # Bot token and webhook URL
 BOT_TOKEN = "7446057407:AAFp5hofMUG_F_Z-VhZjYnzX8MeJ_xvy43M"  # Replace with your bot's token
-WEBHOOK_URL = "https://telegrambot-v26n.onrender.com/webhook"  # Replace <your_domain> with your actual domain
+WEBHOOK_URL = "https://telegrambot-v26n.onrender.com/webhook"  # Replace with your actual domain
 
 # Helper function to make text bold
 def make_bold(text):
@@ -157,35 +158,22 @@ async def button_handler(update: Update, context):
                 parse_mode="MarkdownV2"
             )
 
-# Flask webhook route
+# Setup Flask endpoint to handle webhook
 @app.route('/webhook', methods=['POST'])
-def webhook():
-    json_str = request.get_data().decode('UTF-8')
-    update = Update.de_json(json_str, application.bot)
-    application.process_update(update)
-    return 'ok'
+async def webhook():
+    json_str = request.get_data().decode("UTF-8")
+    update = Update.de_json(json_str, context.bot)
+    await button_handler(update, context)
+    return 'OK'
 
-# Set webhook for the bot
-def set_webhook():
-    application.bot.set_webhook(url=WEBHOOK_URL)
+# Set webhook
+async def set_webhook():
+    await application.bot.set_webhook(WEBHOOK_URL)
 
-# Run Telegram bot with webhook
-def run_telegram_bot():
-    global application
+# Run the bot
+if __name__ == '__main__':
     application = Application.builder().token(BOT_TOKEN).build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button_handler))
-
-    set_webhook()
-
-# Run Flask server
-def run_flask():
-    import os
-    port = int(os.environ.get("PORT", 10000))  # Use dynamic port if available
-    app.run(host='0.0.0.0', port=port)
-
-# Main entry point
-if __name__ == "__main__":
-    import threading
-    threading.Thread(target=run_flask).start()
-    run_telegram_bot()
+    asyncio.run(set_webhook())
+    app.run(port=8443)
