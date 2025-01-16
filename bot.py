@@ -1,11 +1,11 @@
 import os
-import threading
 import re
+import threading
 from flask import Flask, request
 from telegram import Bot, Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
+from telegram.ext import Dispatcher, CommandHandler, CallbackQueryHandler
 
-# Initialize Flask web server
+# Initialize Flask app
 app = Flask(__name__)
 
 # Helper function to make text bold
@@ -13,19 +13,16 @@ def make_bold(text):
     escaped_text = re.sub(r"([_*()~`>#+\-=|{}.!])", r"\\\1", text)  # Escape reserved characters
     return f"*{escaped_text}*"
 
-# Function to handle the /start command
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+# Telegram bot handlers
+def start(update: Update, context):
     chat_id = update.effective_chat.id
-
-    # Welcome message with bold text
-    await context.bot.send_message(
+    context.bot.send_message(
         chat_id=chat_id,
         text=make_bold("🎉 Welcome to the 🤑 Casino Hack Bot 🎲"),
         parse_mode="MarkdownV2"
     )
 
-    # First image message
-    await context.bot.send_photo(
+    context.bot.send_photo(
         chat_id=chat_id,
         photo="https://drive.google.com/uc?id=19p7j4tb9vIz_Ff6vAbcA_cMgnQLasC0O",
         caption=make_bold(
@@ -37,9 +34,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ),
         parse_mode="MarkdownV2"
     )
-    
-    # Hack selection buttons
-    await context.bot.send_photo(
+
+    context.bot.send_photo(
         chat_id=chat_id,
         photo="https://sstournaments.com/piyush/image2.jpg",
         caption=make_bold(
@@ -55,65 +51,51 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         parse_mode="MarkdownV2"
     )
 
-# Function to handle button interactions
-async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+def button_handler(update: Update, context):
     query = update.callback_query
-    await query.answer()  # Acknowledge button press
+    query.answer()
 
-    # Hack data
+    # Data for different hacks
     hack_data = {
-        "sikkim_hack": { ... },  # Complete the data as shown in your original code
-        "goa_hack": { ... },
-        "diuwin_hack": { ... },
-        "okwin_hack": { ... }
+        "sikkim_hack": {
+            "video": "BAACAgUAAxkBAAIFQ2eAOe5opaSq7JJdWVqrLC-X0LEOAAIsFQACUi-YV2dFPleZscusNgQ",
+            "audio": "CQACAgUAAxkBAAIFSWeAOiQz7gvpHAWOjqCJM0HobBtqAAKaEgACmJEAAVR7IngSjkXofTYE",
+            "apk": "BQACAgUAAxkBAAIFUWeAOmX_kgABXmwrS5tReBEf1zPKawACohIAApiRAAFUDlhg__DwTCs2BA",
+            "name": "🔥 SIKKIM VIP HACK 🔥",
+            "caption": make_bold("🚀 Here is your SIKKIM VIP HACK video! 🎮"),
+        },
+        # Define other hacks similarly...
     }
 
     if query.data in hack_data:
         hack = hack_data[query.data]
-        await query.message.reply_video(video=hack["video"], caption=hack["caption"], parse_mode="MarkdownV2")
-        await query.message.reply_audio(audio=hack["audio"], caption=hack["audio_caption"], parse_mode="MarkdownV2")
-        await query.message.reply_document(document=hack["apk"], caption=hack["apk_caption"], parse_mode="MarkdownV2")
-        # Remaining hack buttons
-        ...
+        context.bot.send_video(chat_id=query.message.chat_id, video=hack["video"], caption=hack["caption"], parse_mode="MarkdownV2")
+        context.bot.send_audio(chat_id=query.message.chat_id, audio=hack["audio"])
+        context.bot.send_document(chat_id=query.message.chat_id, document=hack["apk"])
 
-# Webhook endpoint to handle updates from Telegram
-@app.route(f'/webhook/<token>', methods=['POST'])
-def webhook(token):
-    if token == os.getenv("BOT_TOKEN"):  # Use environment variable for security
-        json_data = request.get_json()
-        bot = Bot(token=token)
-        bot.process_new_updates([Update.de_json(json_data, bot)])
-        return "OK", 200
-    return "Unauthorized", 403
+# Flask route for Telegram webhook
+@app.route(f'/{os.getenv("BOT_TOKEN")}', methods=['POST'])
+def webhook():
+    json_data = request.get_json()
+    update = Update.de_json(json_data, bot)
+    dispatcher.process_update(update)
+    return "OK", 200
 
-# Flask home endpoint
-@app.route('/')
-def home():
-    return "Bot is running!"
-
-# Run Flask server
-def run_flask():
-    port = int(os.environ.get("PORT", 8443))  # Use Render's dynamic port
-    app.run(host='0.0.0.0', port=port)
-
-# Run Telegram bot using webhook
-def run_telegram_bot():
-    BOT_TOKEN = os.getenv("BOT_TOKEN")  # Store your bot token in Render environment variables
-    WEBHOOK_URL = os.getenv("WEBHOOK_URL")  # Render app URL
-    application = ApplicationBuilder().token(BOT_TOKEN).build()
-    
-    # Add handlers
-    application.add_handler(CommandHandler("start", start))
-    application.add_handler(CallbackQueryHandler(button_handler))
-    
-    # Set up webhook
-    application.run_webhook(
-        listen="0.0.0.0",
-        port=8443,  # Use HTTPS port
-        url_path=BOT_TOKEN,
-        webhook_url=f"{WEBHOOK_URL}/{BOT_TOKEN}"
-    )
-
+# Main function to set up webhook
 if __name__ == "__main__":
-    threading.Thread(target=run_flask).start()  # Run Flask server in a thread
-    run_telegram_bot()
+    BOT_TOKEN = os.getenv("BOT_TOKEN")  # Ensure this is set in the environment variables
+    WEBHOOK_URL = os.getenv("WEBHOOK_URL")  # e.g., "https://your-app-name.onrender.com"
+
+    # Initialize Telegram bot
+    bot = Bot(token=BOT_TOKEN)
+
+    # Set webhook
+    bot.set_webhook(url=f"{WEBHOOK_URL}/{BOT_TOKEN}")
+
+    # Set up Dispatcher
+    dispatcher = Dispatcher(bot, None)
+    dispatcher.add_handler(CommandHandler("start", start))
+    dispatcher.add_handler(CallbackQueryHandler(button_handler))
+
+    # Start Flask server
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
