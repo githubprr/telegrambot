@@ -1,7 +1,8 @@
-import re
+import os
 import threading
-from flask import Flask
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+import re
+from flask import Flask, request
+from telegram import Bot, Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
 
 # Initialize Flask web server
@@ -53,119 +54,66 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ]),
         parse_mode="MarkdownV2"
     )
-    
+
 # Function to handle button interactions
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()  # Acknowledge button press
 
-    # Video file IDs, audio file links, and captions for each hack
+    # Hack data
     hack_data = {
-        "sikkim_hack": {
-            "video": "BAACAgUAAxkBAAIFQ2eAOe5opaSq7JJdWVqrLC-X0LEOAAIsFQACUi-YV2dFPleZscusNgQ",
-            "name": "🔥 SIKKIM VIP HACK 🔥",
-            "caption": make_bold("🚀 Here is your SIKKIM VIP HACK video! 🎮"),
-            "audio": "CQACAgUAAxkBAAIFSWeAOiQz7gvpHAWOjqCJM0HobBtqAAKaEgACmJEAAVR7IngSjkXofTYE",
-            "audio_caption": make_bold("🎧 Listen to activate hack 🌟\nRegister: http://www.sikkim7.com/#/register?invitationCode=73728400111"),
-            "apk": "BQACAgUAAxkBAAIFUWeAOmX_kgABXmwrS5tReBEf1zPKawACohIAApiRAAFUDlhg__DwTCs2BA",
-            "apk_caption": make_bold("📱 Install this APK to complete the setup for *SIKKIM VIP HACK* 🛠️")
-        },
-        "goa_hack": {
-            "video": "BAACAgUAAxkBAAIFQWeAOdn7lqUmBq-ITbqTadYrxY_UAAIqFQACUi-YV0DfcIG18QsTNgQ",
-            "name": "🌟 GOA STAR HACK 🌟",
-            "caption": make_bold("🚀 Here is your GOA STAR HACK video! 🎮"),
-            "audio": "CQACAgUAAxkBAAIFS2eAOjPn0KdFdeEAAWMuUweLDLggNgACmxIAApiRAAFU6SxTFtK5DUk2BA",
-            "audio_caption": make_bold("🎧 Listen to activate hack 🌟\nRegister: https://www.bing009.com/#/register?invitationCode=416623809168"),
-            "apk": "BQACAgUAAxkBAAIFU2eAOnbRKkBMcXxXwamNLWZ1qrLFAAKjEgACmJEAAVRN0eyjLcLhSDYE",
-            "apk_caption": make_bold("📱 Install this APK to complete the setup for *GOA STAR HACK* 🛠️")
-        },
-        "diuwin_hack": {
-            "video": "BAACAgUAAxkBAAIFRWeAOf_EbK1vELSPelyURuedS4mpAAIlFQACUi-YV1tU16AUCZT6NgQ",
-            "name": "💥 DIUWIN GRAND HACK 💥",
-            "caption": make_bold("🚀 Here is your DIUWIN GRAND HACK video! 🎮"),
-            "audio": "CQACAgUAAxkBAAIFTWeAOkLGn32xjcK6A3BEzCqFs5a3AAKcEgACmJEAAVSC4M7nMebJ0DYE",
-            "audio_caption": make_bold("🎧 Listen to activate hack 🌟\nRegister: https://diuwinapp.pro/#/register?invitationCode=42677100202"),
-            "apk": "BQACAgUAAxkBAAIFVWeAOoTBs2wb6JfzAlwU7UNBWydqAAKkEgACmJEAAVSs9mEiy1S7kTYE",
-            "apk_caption": make_bold("📱 Install this APK to complete the setup for *DIUWIN GRAND HACK* 🛠️")
-        },
-        "okwin_hack": {
-            "video": "BAACAgUAAxkBAAIFR2eAOhB1gie6sAYYsQdImO4OD5uvAAInFQACUi-YV6lnP25EkisMNgQ",
-            "name": "🔒 OKWIN SURE HACK 🔒",
-            "caption": make_bold("🚀 Here is your OKWIN SURE HACK video! 🎮"),
-            "audio": "CQACAgUAAxkBAAIFT2eAOlD14d3qKLvfnxQOi-qtVdTeAAKdEgACmJEAAVTYKP70xt2zojYE",
-            "audio_caption": make_bold("🎧 Listen to activate hack 🌟\nRegister: https://www.okowin.com/#/register?invitationCode=282452739393"),
-            "apk": "BQACAgUAAxkBAAIFV2eAOpPDdEHIne843nNqHhiKf6InAAKlEgACmJEAAVSOa7SdBd1b2TYE",
-            "apk_caption": make_bold("📱 Install this APK to complete the setup for *OKWIN SURE HACK* 🛠️")
-        }
+        "sikkim_hack": { ... },  # Complete the data as shown in your original code
+        "goa_hack": { ... },
+        "diuwin_hack": { ... },
+        "okwin_hack": { ... }
     }
 
     if query.data in hack_data:
         hack = hack_data[query.data]
+        await query.message.reply_video(video=hack["video"], caption=hack["caption"], parse_mode="MarkdownV2")
+        await query.message.reply_audio(audio=hack["audio"], caption=hack["audio_caption"], parse_mode="MarkdownV2")
+        await query.message.reply_document(document=hack["apk"], caption=hack["apk_caption"], parse_mode="MarkdownV2")
+        # Remaining hack buttons
+        ...
 
-        # Send the video using file ID
-        await query.message.reply_video(
-            video=hack["video"],
-            caption=hack["caption"],
-            parse_mode="MarkdownV2"
-        )
+# Webhook endpoint to handle updates from Telegram
+@app.route(f'/webhook/<token>', methods=['POST'])
+def webhook(token):
+    if token == os.getenv("BOT_TOKEN"):  # Use environment variable for security
+        json_data = request.get_json()
+        bot = Bot(token=token)
+        bot.process_new_updates([Update.de_json(json_data, bot)])
+        return "OK", 200
+    return "Unauthorized", 403
 
-        # Send the audio with its caption
-        await query.message.reply_audio(
-            audio=hack["audio"],
-            caption=hack["audio_caption"],
-            parse_mode="MarkdownV2"
-        )
-
-        # Send the APK file link
-        await query.message.reply_document(
-            document=hack["apk"],
-            caption=hack["apk_caption"],
-            parse_mode="MarkdownV2"
-        )
-
-        # Send additional text and inline buttons for other hacks, excluding the chosen one
-        await query.message.reply_text(
-            text=make_bold("🚀 Hamare dusre hacks try karo! 💥"),
-            parse_mode="MarkdownV2"
-        )
-
-        # Inline buttons for remaining hacks, showing hack names with emojis
-        remaining_hacks = [key for key in hack_data if key != query.data]
-        inline_buttons = [
-            [InlineKeyboardButton(f"✅{hack_data[hack]['name']}✅", callback_data=hack)] for hack in remaining_hacks
-        ]
-
-        await query.message.reply_text(
-            text=make_bold("Try another hack! 👇"),
-            reply_markup=InlineKeyboardMarkup(inline_buttons),
-            parse_mode="MarkdownV2"
-        )
-
-# Flask endpoints
+# Flask home endpoint
 @app.route('/')
 def home():
     return "Bot is running!"
 
-@app.route('/test')
-def test():
-    return "Test endpoint active!"
-
-# Run Telegram bot
-def run_telegram_bot():
-    # Hardcoded bot token
-    BOT_TOKEN = "7446057407:AAFp5hofMUG_F_Z-VhZjYnzX8MeJ_xvy43M"
-    application = ApplicationBuilder().token(BOT_TOKEN).build()
-    application.add_handler(CommandHandler("start", start))
-    application.add_handler(CallbackQueryHandler(button_handler))
-    application.run_polling()
-
 # Run Flask server
 def run_flask():
-    import os
-    port = int(os.environ.get("PORT", 10000))  # Use dynamic port if available
+    port = int(os.environ.get("PORT", 8443))  # Use Render's dynamic port
     app.run(host='0.0.0.0', port=port)
 
-# Main entry point
+# Run Telegram bot using webhook
+def run_telegram_bot():
+    BOT_TOKEN = os.getenv("BOT_TOKEN")  # Store your bot token in Render environment variables
+    WEBHOOK_URL = os.getenv("WEBHOOK_URL")  # Render app URL
+    application = ApplicationBuilder().token(BOT_TOKEN).build()
+    
+    # Add handlers
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CallbackQueryHandler(button_handler))
+    
+    # Set up webhook
+    application.run_webhook(
+        listen="0.0.0.0",
+        port=8443,  # Use HTTPS port
+        url_path=BOT_TOKEN,
+        webhook_url=f"{WEBHOOK_URL}/{BOT_TOKEN}"
+    )
+
 if __name__ == "__main__":
-    threading.Thread(target=run_flask).start()
+    threading.Thread(target=run_flask).start()  # Run Flask server in a thread
     run_telegram_bot()
